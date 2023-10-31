@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { resolve } from 'path';
 
 export default defineConfig({
@@ -13,13 +13,13 @@ export default defineConfig({
       },
       {
         find: '@Layouts',
-        replacement: resolve(__dirname, 'src/Layouts')
+        replacement: resolve(__dirname, 'src/Layouts'),
       },
       {
         find: '@Pages',
-        replacement: resolve(__dirname, 'src/Pages')
-      }
+        replacement: resolve(__dirname, 'src/Pages'),
+      },
     ],
   },
-  plugins: [react(), tsconfigPaths()]
-})
+  plugins: [react(), tsconfigPaths()],
+});
