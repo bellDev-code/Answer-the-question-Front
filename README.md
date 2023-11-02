@@ -34,6 +34,9 @@
 ### Tailwind CSS
    - 요새 한창 프론트 엔드 개발자 사이에서 많이 사용하는 Tailwind CSS를 활용하여 기존 CSS 설정 시 컴포넌트에 대한 네이밍 고민 없이 작성할 수 있다는 매력에 채택
 
+### Material UI
+   - 사용된 Modal 등 UI 구성에 시간 소모를 단축, 옛날부터 많이 써오던 라이브러리 및 커스터마이징 경험이 있으므로 채택함
+
 ### axios
    - Axios는 브라우저, Node.js를 위한 Promise API를 활용하는 HTTP 비동기 통신 라이브러리를 활용할 예정
 
