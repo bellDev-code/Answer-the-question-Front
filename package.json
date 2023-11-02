@@ -39,6 +39,11 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "prettier --cache --write",
