@@ -23,7 +23,7 @@
     "paths": {
       "@Components/*": ["src/Components/*"],
       "@Layouts/*":["src/Layouts/*"],
-      "@Pages/*":["src/Layouts/*"]
+      "@Pages/*":["src/Pages/*"]
     }
   },
   "types": ["node"]
