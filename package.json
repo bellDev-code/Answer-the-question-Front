@@ -13,6 +13,7 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
+    "@types/node": "^20.8.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
