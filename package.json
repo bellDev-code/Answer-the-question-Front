@@ -9,8 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky install",
-    "format": "prettier --cache --write .",
-    "pre-commit": "lint-staged"
+    "format": "prettier --cache --write ."
   },
   "dependencies": {
     "@types/node": "^20.8.10",
