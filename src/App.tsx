@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from '@Layouts/Home';
 
 const App = () => {
   return (
-    <h1 className="sm:text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
