@@ -1,8 +1,14 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 const SingleInput = () => {
   const [name, setName] = useState<string>('');
   const [names, setNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    const savedNames = JSON.parse(sessionStorage.getItem('names') || '[]');
+
+    setNames(savedNames);
+  }, []);
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -10,7 +16,9 @@ const SingleInput = () => {
 
   const handleAddName = () => {
     if (name) {
-      setNames([...names, name]);
+      const updatedNames = [...names, name];
+      setNames(updatedNames);
+      sessionStorage.setItem('names', JSON.stringify(updatedNames));
       setName('');
     }
   };
