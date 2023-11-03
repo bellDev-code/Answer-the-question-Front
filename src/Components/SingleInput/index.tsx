@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SingleInput = () => {
   const [name, setName] = useState<string>('');
@@ -21,6 +22,12 @@ const SingleInput = () => {
       sessionStorage.setItem('names', JSON.stringify(updatedNames));
       setName('');
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    navigate('/singlePage/answerSelect');
   };
 
   return (
@@ -50,7 +57,9 @@ const SingleInput = () => {
         <p className='sm: text-lg font-semibold'>총 인원: {names.length}</p>
       </div>
       <div className='sm: flex justify-end py-10'>
-        <button className='sm: bg-black text-white w-20 p-1 rounded-xl'>다음</button>
+        <button onClick={handleNext} className='sm: bg-black text-white w-20 p-1 rounded-xl'>
+          다음
+        </button>
       </div>
     </div>
   );
