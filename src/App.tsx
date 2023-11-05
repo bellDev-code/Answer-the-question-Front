@@ -5,6 +5,7 @@ import SingleDevice from '@Layouts/SingleDevice';
 import AnswerSelect from '@Components/AnswerSelect';
 import SelectQApage from '@Pages/SinglePage/SelectQApage';
 import RandomQApage from '@Pages/SinglePage/RandomQApage';
+import AnswerPage from '@Pages/SinglePage/AnswerPage';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path='/singlePage' element={<SingleDevice />} />
         <Route path='/singlePage/answerSelect' element={<AnswerSelect />} />
         <Route path='/singlePage/answerSelect/selectQApage' element={<SelectQApage />} />
+        <Route path='/singlePage/answerSelect/selectQApage/AnswerPage' element={<AnswerPage />} />
         <Route path='/singlePage/answerSelect/randomQApage' element={<RandomQApage />} />
       </Routes>
     </BrowserRouter>

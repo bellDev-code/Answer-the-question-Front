@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SinglePlayerSelect = () => {
   const [names, setNames] = useState<string[]>([]);
   const [selectedName, setSelectedName] = useState<string | null>();
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
     const savedNames = JSON.parse(sessionStorage.getItem('names') || '[]');
@@ -11,6 +13,14 @@ const SinglePlayerSelect = () => {
 
   const handleNameClick = (name: string) => {
     setSelectedName(name);
+
+    setDisabled(false);
+  };
+
+  const navigate = useNavigate();
+
+  const handlePass = () => {
+    navigate(`/singlePage/answerSelect/selectQApage/AnswerPage?name=${selectedName}`);
   };
 
   return (
@@ -30,12 +40,19 @@ const SinglePlayerSelect = () => {
           ))}
         </div>
         <div className='sm:w-2/4'>
-          {selectedName && (
-            <div className='text-l'>
-              질문 대상자를 선택한 후 건내기 버튼을 누르고 기기를 질문 대상자에게 주세요
-            </div>
-          )}
+          <div className='text-l'>
+            질문 대상자를 선택한 후 건내기 버튼을 누르고 기기를 질문 대상자에게 주세요
+          </div>
         </div>
+      </div>
+      <div className='sm: flex justify-end px-10'>
+        <button
+          className='sm: bg-black text-white w-20 p-1 rounded-xl disabled:bg-gray-400'
+          onClick={handlePass}
+          disabled={disabled}
+        >
+          건내기
+        </button>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 type IQuestionProps = {
   id: string;
@@ -25,7 +25,15 @@ const QuestionList = ({ categories }: QuestionListProps) => {
     return questions[randomIndex];
   };
 
-  const randomQuestion = getRandomQuestion();
+  const storedRandomQuestion = sessionStorage.getItem('randomQuestion');
+
+  const randomQuestion = storedRandomQuestion
+    ? JSON.parse(storedRandomQuestion)
+    : getRandomQuestion();
+
+  useEffect(() => {
+    sessionStorage.setItem('randomQuestion', JSON.stringify(randomQuestion));
+  }, [randomQuestion]);
 
   return (
     <div>
