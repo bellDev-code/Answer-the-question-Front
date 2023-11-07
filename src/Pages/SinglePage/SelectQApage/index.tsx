@@ -1,12 +1,12 @@
 import SinglePlayerSelect from '@Components/SinglePlayerSelect';
-import SingleQuestionList from '@Components/SingleQuestionList';
-import { categories } from '@Components/SingleQuestionList/Mockup';
+// import SingleQuestionList from '@Components/SingleQuestionList'
 import React from 'react';
 
 const SelectQApage = () => {
   return (
     <>
-      <SingleQuestionList categories={categories} />
+      {/* 목업 데이터 삭제 */}
+      {/* <SingleQuestionList /> */}
       <SinglePlayerSelect />
     </>
   );

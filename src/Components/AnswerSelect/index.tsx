@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import useSingleInputStore from '@Store/useSingleInputStore';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAnswerSelectStore from '@Store/useAnswerSelectStore';
+import { startGame } from '@Api/Api';
+import useApiStore from '@Store/useApiStore';
 
 const AnswerSelect = () => {
   const navigate = useNavigate();
-  const [selectedRoute, setSelectedRoute] = useState<string>('');
+  const { setApiResult } = useApiStore();
+
+  const { players } = useSingleInputStore();
+  const { selectedRoute, setSelectedRoute } = useAnswerSelectStore();
 
   const handlePrevious = () => {
     navigate('/singlePage');
@@ -17,11 +24,27 @@ const AnswerSelect = () => {
     setSelectedRoute('/singlePage/answerSelect/randomQApage');
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
     if (selectedRoute) {
-      navigate(selectedRoute);
+      try {
+        const gameStartData = {
+          players,
+          playerSelectionType: 'direct' as const,
+          category: 'serious' as const,
+        };
+
+        const response = await startGame(gameStartData);
+
+        console.log(response);
+
+        if (response.code === 200) {
+          setApiResult(response);
+          navigate(selectedRoute);
+        }
+      } catch (error) {
+        console.error('An error occurred while starting the game:', error);
+      }
     }
-    // 어떤 라우터 경로가 선택되지 않았을 경우 에러 처리 예정
   };
 
   return (

@@ -8,6 +8,7 @@ type SingleInputState = {
   setName: (username: string) => void;
   setDisabled: (disabled: boolean) => void;
   addName: () => void;
+  viewNames: () => void;
 };
 
 const useSingleInputStore = create<SingleInputState>((set) => ({
@@ -30,6 +31,12 @@ const useSingleInputStore = create<SingleInputState>((set) => ({
       }
       return state;
     });
+  },
+  viewNames: () => {
+    const savedPlayers = JSON.parse(sessionStorage.getItem('players') || '[]');
+    if (savedPlayers && savedPlayers.length) {
+      set({ players: savedPlayers });
+    }
   },
 }));
 
