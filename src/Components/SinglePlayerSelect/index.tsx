@@ -7,13 +7,12 @@ const SinglePlayerSelect = () => {
   const { players, username, disabled, setNames, setName, setDisabled, viewNames } =
     useSingleInputStore();
   const { apiResult } = useApiStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     viewNames();
     setDisabled(true);
   }, [setNames]);
-
-  const navigate = useNavigate();
 
   const handleNameClick = (name: string) => {
     setName(name);
@@ -29,7 +28,7 @@ const SinglePlayerSelect = () => {
       <div className='sm: flex flex-col py-5 items-center justify-between'>
         {/* 여기에서 selectedQuestion이 보여야함 */}
         <div>
-          <div>{apiResult?.data?.selectedQuestion.text}</div>
+          <div>{apiResult?.data.selectedQuestion.text}</div>
         </div>
         <div className='sm: h-[120px] w-3/5 my-5 px-4 overflow-auto'>
           {players.map((player, index) => (

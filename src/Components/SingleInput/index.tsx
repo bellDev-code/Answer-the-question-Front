@@ -29,6 +29,11 @@ const SingleInput = () => {
             placeholder='이름을 입력해주세요.'
             value={username}
             onChange={handleNameChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                addName();
+              }
+            }}
           />
           <button className='sm: bg-black text-white w-20 p-1 rounded-xl' onClick={handleAddName}>
             추가

@@ -1,9 +1,9 @@
-import { GameStartData } from '@Api/Api';
+import { IResponseGameInfo, IResponseBase } from '@Api/types';
 import { create } from 'zustand';
 
 interface ApiStore {
-  apiResult: GameStartData | null;
-  setApiResult: (result: GameStartData) => void;
+  apiResult: IResponseBase<IResponseGameInfo> | null;
+  setApiResult: (result: IResponseBase<IResponseGameInfo>) => void;
 }
 
 const useApiStore = create<ApiStore>((set) => ({

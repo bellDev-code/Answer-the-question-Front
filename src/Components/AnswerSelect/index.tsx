@@ -2,14 +2,16 @@ import useSingleInputStore from '@Store/useSingleInputStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAnswerSelectStore from '@Store/useAnswerSelectStore';
-import { startGame } from '@Api/Api';
+import { useStartGameQuery } from '@Api/Api';
 import useApiStore from '@Store/useApiStore';
+import { IRequestGameStartData } from '@Api/types';
 
 const AnswerSelect = () => {
   const navigate = useNavigate();
+  const { players } = useSingleInputStore();
+  const { mutate: startGameMutate } = useStartGameQuery();
   const { setApiResult } = useApiStore();
 
-  const { players } = useSingleInputStore();
   const { selectedRoute, setSelectedRoute } = useAnswerSelectStore();
 
   const handlePrevious = () => {
@@ -27,20 +29,24 @@ const AnswerSelect = () => {
   const handleStart = async () => {
     if (selectedRoute) {
       try {
-        const gameStartData = {
+        const gameStartData: IRequestGameStartData = {
           players,
-          playerSelectionType: 'direct' as const,
-          category: 'serious' as const,
+          playerSelectionType: 'direct',
+          category: 'serious',
         };
 
-        const response = await startGame(gameStartData);
-
-        console.log(response);
-
-        if (response.code === 200) {
-          setApiResult(response);
-          navigate(selectedRoute);
-        }
+        startGameMutate(gameStartData, {
+          onSuccess: (data) => {
+            console.log(data);
+            if (data.code === 200) {
+              setApiResult(data);
+              navigate(selectedRoute);
+            }
+          },
+          onError: (error) => {
+            console.log(error);
+          },
+        });
       } catch (error) {
         console.error('An error occurred while starting the game:', error);
       }
