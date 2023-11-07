@@ -1,4 +1,4 @@
-import { useQuestionListMutation } from '@Api/Api';
+import { useQuestionListMutation } from '@Api/singleGame';
 import useApiStore from '@Store/useApiStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +12,16 @@ const AnswerComponent = () => {
   const handlePass = () => {
     nextQuestionMutate(apiResult?.data._id || '', {
       onSuccess: (data) => {
+        // TODO: 여기서 data.code가 200이 아니면 에러처리
+        if (data.code !== 200) {
+          alert('다음 질문을 불러오는데 실패했습니다.');
+          return;
+        }
         setApiResult(data);
         navigate(`/singlePage/answerSelect/selectQApage`);
       },
       onError: (error) => {
+        // FIXME: 에러처리 서버 코드에 따라서 다르게 처리해야함
         console.log(error);
         alert('다음 질문을 불러오는데 실패했습니다.');
       },

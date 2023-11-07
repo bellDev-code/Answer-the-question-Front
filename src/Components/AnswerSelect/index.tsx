@@ -2,9 +2,10 @@ import useSingleInputStore from '@Store/useSingleInputStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAnswerSelectStore from '@Store/useAnswerSelectStore';
-import { useStartGameQuery } from '@Api/Api';
+import { useStartGameQuery } from '@Api/singleGame';
 import useApiStore from '@Store/useApiStore';
 import { IRequestGameStartData } from '@Api/types';
+import { ROUTE_PATH } from 'src/config/constant';
 
 const AnswerSelect = () => {
   const navigate = useNavigate();
@@ -15,41 +16,40 @@ const AnswerSelect = () => {
   const { selectedRoute, setSelectedRoute } = useAnswerSelectStore();
 
   const handlePrevious = () => {
-    navigate('/singlePage');
+    navigate(ROUTE_PATH.SINGLE_PAGE);
   };
 
   const selectQApage = () => {
-    setSelectedRoute('/singlePage/answerSelect/selectQApage');
+    setSelectedRoute(ROUTE_PATH.SELECT_QA_PAGE);
   };
 
   const randomQApage = () => {
-    setSelectedRoute('/singlePage/answerSelect/randomQApage');
+    setSelectedRoute(ROUTE_PATH.RANDOM_QA_PAGE);
   };
 
   const handleStart = async () => {
     if (selectedRoute) {
-      try {
-        const gameStartData: IRequestGameStartData = {
-          players,
-          playerSelectionType: 'direct',
-          category: 'serious',
-        };
+      const gameStartData: IRequestGameStartData = {
+        players,
+        playerSelectionType: 'direct',
+        category: 'serious',
+      };
 
-        startGameMutate(gameStartData, {
-          onSuccess: (data) => {
+      startGameMutate(gameStartData, {
+        onSuccess: (data) => {
+          if (data.code === 200) {
+            setApiResult(data);
+            navigate(selectedRoute);
+          } else {
+            // 통신은 성공했으나, 서버에서 에러를 보내준 경우
             console.log(data);
-            if (data.code === 200) {
-              setApiResult(data);
-              navigate(selectedRoute);
-            }
-          },
-          onError: (error) => {
-            console.log(error);
-          },
-        });
-      } catch (error) {
-        console.error('An error occurred while starting the game:', error);
-      }
+          }
+        },
+        onError: (error) => {
+          // FIXME: 에러처리 서버 코드에 따라서 다르게 처리해야함
+          console.log(error);
+        },
+      });
     }
   };
 

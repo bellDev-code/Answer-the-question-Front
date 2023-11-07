@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Modal, Typography } from '@mui/material';
 
 type RuleModalProps = {

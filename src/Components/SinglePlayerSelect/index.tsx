@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/useSingleInputStore'; // Import your store
 import useApiStore from '@Store/useApiStore';
+import { ROUTE_PATH } from 'src/config/constant';
 
 const SinglePlayerSelect = () => {
   const { players, username, disabled, setNames, setName, setDisabled, viewNames } =
@@ -20,7 +21,7 @@ const SinglePlayerSelect = () => {
   };
 
   const handlePass = () => {
-    navigate(`/singlePage/answerSelect/selectQApage/AnswerPage?name=${username}`);
+    navigate(ROUTE_PATH.ANSWER_PAGE);
   };
 
   return (

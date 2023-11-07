@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/useSingleInputStore';
+import { ROUTE_PATH } from 'src/config/constant';
 
 const SingleInput = () => {
   const { username, players, disabled, setName, addName } = useSingleInputStore();
@@ -16,7 +17,7 @@ const SingleInput = () => {
   };
 
   const handleNext = () => {
-    navigate('/singlePage/answerSelect');
+    navigate(ROUTE_PATH.ANSWER_SELECT);
   };
 
   return (
