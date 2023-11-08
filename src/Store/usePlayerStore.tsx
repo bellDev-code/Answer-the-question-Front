@@ -4,10 +4,12 @@ type SingleInputState = {
   username: string;
   players: { username: string }[];
   disabled: boolean;
+  isButtonEnabled: boolean;
   setNames: (players: string[]) => void;
   setName: (username: string) => void;
   setDisabled: (disabled: boolean) => void;
   addName: () => void;
+  deleteName: (index: number) => void;
   viewNames: () => void;
 };
 
@@ -15,6 +17,7 @@ const useSingleInputStore = create<SingleInputState>((set) => ({
   username: '',
   players: [],
   disabled: true,
+  isButtonEnabled: false,
   setNames: (players) => {
     const nameObjects = players.map((username) => ({ username }));
     set({ players: nameObjects });
@@ -27,9 +30,22 @@ const useSingleInputStore = create<SingleInputState>((set) => ({
       if (state.username) {
         const updatedNames = [...state.players, { username: state.username }];
         sessionStorage.setItem('players', JSON.stringify({ players: updatedNames }));
-        return { players: updatedNames, username: '', disabled: false };
+
+        const isButtonEnabled = updatedNames.length >= 2;
+
+        return { players: updatedNames, username: '', isButtonEnabled };
       }
       return state;
+    });
+  },
+  deleteName: (index) => {
+    set((state) => {
+      const updatedNames = state.players.filter((_, i) => i !== index);
+      sessionStorage.setItem('players', JSON.stringify({ players: updatedNames }));
+
+      const isButtonEnabled = updatedNames.length >= 2;
+
+      return { players: updatedNames, isButtonEnabled };
     });
   },
   viewNames: () => {

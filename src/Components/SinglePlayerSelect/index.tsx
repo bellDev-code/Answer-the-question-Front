@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useSingleInputStore from '@Store/useSingleInputStore'; // Import your store
+import useSingleInputStore from '@Store/usePlayerStore';
 import useApiStore from '@Store/useApiStore';
 import { ROUTE_PATH } from 'src/config/constant';
 

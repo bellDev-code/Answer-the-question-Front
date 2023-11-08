@@ -1,4 +1,4 @@
-import useSingleInputStore from '@Store/useSingleInputStore';
+import useSingleInputStore from '@Store/usePlayerStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAnswerSelectStore from '@Store/useAnswerSelectStore';
