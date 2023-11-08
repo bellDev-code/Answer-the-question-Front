@@ -1,40 +1,23 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useSingleInputStore from '@Store/useSingleInputStore';
+import { ROUTE_PATH } from 'src/config/constant';
 
 const SingleInput = () => {
-  const [name, setName] = useState<string>('');
-  const [names, setNames] = useState<string[]>([]);
-  const [disabled, setDisabled] = useState<boolean>(true);
+  const { username, players, disabled, setName, addName } = useSingleInputStore();
 
-  useEffect(() => {
-    const savedNames = JSON.parse(sessionStorage.getItem('names') || '[]');
-
-    setNames(savedNames);
-
-    if (savedNames.length > 0) {
-      setDisabled(false);
-    }
-  }, []);
+  const navigate = useNavigate();
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 
   const handleAddName = () => {
-    if (name) {
-      const updatedNames = [...names, name];
-      setNames(updatedNames);
-      sessionStorage.setItem('names', JSON.stringify(updatedNames));
-      setName('');
-
-      setDisabled(false);
-    }
+    addName();
   };
 
-  const navigate = useNavigate();
-
   const handleNext = () => {
-    navigate('/singlePage/answerSelect');
+    navigate(ROUTE_PATH.ANSWER_SELECT);
   };
 
   return (
@@ -45,23 +28,28 @@ const SingleInput = () => {
             className='sm: p-2 border-b  border-black place-content-center'
             type='text'
             placeholder='이름을 입력해주세요.'
-            value={name}
+            value={username}
             onChange={handleNameChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                addName();
+              }
+            }}
           />
           <button className='sm: bg-black text-white w-20 p-1 rounded-xl' onClick={handleAddName}>
             추가
           </button>
         </div>
         <div className='sm: h-[120px] w-3/5 my-5 overflow-auto'>
-          {names.map((name, index) => (
+          {players.map((player, index) => (
             <div key={index}>
-              <span>{index + 1}.</span> {name}
+              <span>{index + 1}.</span> {player.username}
             </div>
           ))}
         </div>
       </div>
       <div className='sm: flex'>
-        <p className='sm: text-lg font-semibold'>총 인원: {names.length}</p>
+        <p className='sm: text-lg font-semibold'>총 인원: {players.length}</p>
       </div>
       <div className='sm: flex justify-end py-10'>
         <button

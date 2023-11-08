@@ -19,6 +19,14 @@ export default defineConfig({
         find: '@Pages',
         replacement: resolve(__dirname, 'src/Pages'),
       },
+      {
+        find: '@Store',
+        replacement: resolve(__dirname, 'src/Store'),
+      },
+      {
+        find: '@Api',
+        replacement: resolve(__dirname, 'src/Api'),
+      },
     ],
   },
   plugins: [react(), tsconfigPaths()],

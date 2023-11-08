@@ -23,7 +23,9 @@
     "paths": {
       "@Components/*": ["src/Components/*"],
       "@Layouts/*":["src/Layouts/*"],
-      "@Pages/*":["src/Pages/*"]
+      "@Pages/*":["src/Pages/*"],
+      "@Store/*":["src/Store/*"],
+      "@Api/*":["src/Api/*"]
     }
   },
   "types": ["node"]
