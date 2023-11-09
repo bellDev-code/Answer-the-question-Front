@@ -5,8 +5,16 @@ import useApiStore from '@Store/useApiStore';
 import { ROUTE_PATH } from 'src/config/constant';
 
 const SinglePlayerSelect = () => {
-  const { players, username, disabled, setNames, setName, setDisabled, viewNames } =
-    useSingleInputStore();
+  const {
+    players,
+    username,
+    disabled,
+    setNames,
+    setName,
+    setDisabled,
+    viewNames,
+    setSelectedName,
+  } = useSingleInputStore();
   const { apiResult } = useApiStore();
   const navigate = useNavigate();
 
@@ -18,6 +26,7 @@ const SinglePlayerSelect = () => {
   const handleNameClick = (name: string) => {
     setName(name);
     setDisabled(false);
+    setSelectedName(name);
   };
 
   const handlePass = () => {
@@ -27,7 +36,6 @@ const SinglePlayerSelect = () => {
   return (
     <>
       <div className='sm: flex flex-col py-5 items-center justify-between'>
-        {/* 여기에서 selectedQuestion이 보여야함 */}
         <div>
           <div>{apiResult?.data.selectedQuestion.text}</div>
         </div>

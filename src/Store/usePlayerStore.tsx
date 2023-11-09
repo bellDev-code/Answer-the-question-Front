@@ -11,6 +11,8 @@ type SingleInputState = {
   addName: () => void;
   deleteName: (index: number) => void;
   viewNames: () => void;
+  selectedName: string | null;
+  setSelectedName: (name: string | null) => void;
 };
 
 const useSingleInputStore = create<SingleInputState>((set) => ({
@@ -54,6 +56,8 @@ const useSingleInputStore = create<SingleInputState>((set) => ({
       set({ players: savedPlayers });
     }
   },
+  selectedName: null,
+  setSelectedName: (name) => set({ selectedName: name }),
 }));
 
 export default useSingleInputStore;

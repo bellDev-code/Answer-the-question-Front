@@ -1,5 +1,6 @@
 import { useQuestionListMutation } from '@Api/singleGame';
 import useApiStore from '@Store/useApiStore';
+import useSingleInputStore from '@Store/usePlayerStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ const AnswerComponent = () => {
   const navigate = useNavigate();
 
   const { apiResult, setApiResult } = useApiStore();
+  const { selectedName } = useSingleInputStore();
   const { mutate: nextQuestionMutate } = useQuestionListMutation();
 
   const handlePass = () => {
@@ -32,12 +34,11 @@ const AnswerComponent = () => {
     <>
       <div className='sm: flex flex-col py-5 items-center justify-between'>
         <div className='sm: flex flex-col py-5 items-center justify-between'>
-          {/* 여기에서 selectedQuestion이 보여야함 */}
           <div>
             <div>{apiResult?.data.selectedQuestion.text}</div>
           </div>
           <div className='sm: h-[120px] w-3/5 my-5 px-4 overflow-auto'>
-            <div>{apiResult?.data.selectedPlayer.username}</div>
+            <div>{selectedName}</div>
           </div>
           <div className='sm:w-2/4'>
             <div className='text-l'>다음 질문을 하기 위해 다음 질문 버튼을 눌러주세요</div>

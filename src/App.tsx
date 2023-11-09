@@ -8,6 +8,7 @@ import RandomQApage from '@Pages/SinglePage/RandomQApage';
 import AnswerPage from '@Pages/SinglePage/AnswerPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ROUTE_PATH } from './config/constant';
+import EndPage from '@Pages/SinglePage/EndPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,10 @@ const App = () => {
           <Route path='/singlePage/answerSelect' element={<AnswerSelect />} />
           <Route path='/singlePage/answerSelect/selectQApage' element={<SelectQApage />} />
           <Route path='/singlePage/answerSelect/selectQApage/answerPage' element={<AnswerPage />} />
+          <Route
+            path='/singlePage/answerSelect/selectQApage/answerPage/end'
+            element={<EndPage />}
+          />
           <Route path='/singlePage/answerSelect/randomQApage' element={<RandomQApage />} />
         </Routes>
       </BrowserRouter>
