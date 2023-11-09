@@ -13,9 +13,11 @@ type SingleInputState = {
   viewNames: () => void;
   selectedName: string | null;
   setSelectedName: (name: string | null) => void;
+  randomSelectedName: string | null;
+  setRandomSelectedName: () => void;
 };
 
-const useSingleInputStore = create<SingleInputState>((set) => ({
+const usePlayerStore = create<SingleInputState>((set) => ({
   username: '',
   players: [],
   disabled: true,
@@ -58,6 +60,14 @@ const useSingleInputStore = create<SingleInputState>((set) => ({
   },
   selectedName: null,
   setSelectedName: (name) => set({ selectedName: name }),
+  randomSelectedName: null,
+  setRandomSelectedName: () => {
+    set((state) => {
+      const randomIndex = Math.floor(Math.random() * state.players.length);
+      const randomName = state.players[randomIndex]?.username || null;
+      return { randomSelectedName: randomName };
+    });
+  },
 }));
 
-export default useSingleInputStore;
+export default usePlayerStore;

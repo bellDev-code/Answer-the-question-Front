@@ -34,7 +34,7 @@ const App = () => {
             path='/singlePage/answerSelect/selectQApage/answerPage/end'
             element={<EndPage />}
           />
-          <Route path='/singlePage/answerSelect/randomQApage' element={<RandomQApage />} />
+          <Route path='/singlePage/answerSelect/randomAQpage' element={<RandomQApage />} />
           <Route path='donatePage' element={<DonatePage />} />
         </Routes>
       </BrowserRouter>
