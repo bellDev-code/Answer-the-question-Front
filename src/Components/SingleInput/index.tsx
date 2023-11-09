@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/usePlayerStore';
-import { ROUTE_PATH } from 'src/config/constant';
+import { ROUTE_PATH } from '@Config/constant';
 
 const SingleInput = () => {
   const { username, players, isButtonEnabled, setName, addName, deleteName } =

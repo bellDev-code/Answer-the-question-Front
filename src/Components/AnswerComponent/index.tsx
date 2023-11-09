@@ -1,8 +1,9 @@
 import { useQuestionListMutation } from '@Api/singleGame';
 import useApiStore from '@Store/useApiStore';
 import useSingleInputStore from '@Store/usePlayerStore';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_PATH } from '../../Config/constant';
 
 const AnswerComponent = () => {
   const navigate = useNavigate();
@@ -10,6 +11,18 @@ const AnswerComponent = () => {
   const { apiResult, setApiResult } = useApiStore();
   const { selectedName } = useSingleInputStore();
   const { mutate: nextQuestionMutate } = useQuestionListMutation();
+
+  useEffect(() => {
+    try {
+      const goEndPage = apiResult?.data.isOver === true;
+
+      if (goEndPage) {
+        navigate(`${ROUTE_PATH.END_PAGE}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   const handlePass = () => {
     nextQuestionMutate(apiResult?.data._id || '', {
@@ -20,7 +33,7 @@ const AnswerComponent = () => {
           return;
         }
         setApiResult(data);
-        navigate(`/singlePage/answerSelect/selectQApage`);
+        navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`);
       },
       onError: (error) => {
         // FIXME: 에러처리 서버 코드에 따라서 다르게 처리해야함

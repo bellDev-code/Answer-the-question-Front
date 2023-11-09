@@ -27,6 +27,10 @@ export default defineConfig({
         find: '@Api',
         replacement: resolve(__dirname, 'src/Api'),
       },
+      {
+        find: '@Config',
+        replacement: resolve(__dirname, 'src/Config'),
+      },
     ],
   },
   plugins: [react(), tsconfigPaths()],
