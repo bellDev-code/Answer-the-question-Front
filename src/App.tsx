@@ -28,16 +28,13 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path={ROUTE_PATH.SINGLE_PAGE} element={<SingleDevice />} />
-          <Route path='/singlePage/answerSelect' element={<AnswerSelect />} />
-          <Route path='/singlePage/answerSelect/selectQApage' element={<SelectQApage />} />
-          <Route path='/singlePage/answerSelect/selectQApage/answerPage' element={<AnswerPage />} />
-          <Route
-            path='/singlePage/answerSelect/selectQApage/answerPage/BmPage'
-            element={<BmPage />}
-          />
-          <Route path='/singlePage/answerSelect/randomAQpage' element={<RandomQApage />} />
+          <Route path={ROUTE_PATH.ANSWER_SELECT} element={<AnswerSelect />} />
+          <Route path={ROUTE_PATH.SELECT_QA_PAGE} element={<SelectQApage />} />
+          <Route path={ROUTE_PATH.ANSWER_PAGE} element={<AnswerPage />} />
+          <Route path={ROUTE_PATH.BM_PAGE} element={<BmPage />} />
+          <Route path={ROUTE_PATH.RANDOM_QA_PAGE} element={<RandomQApage />} />
           <Route path={ROUTE_PATH.END_PAGE} element={<EndPage />} />
-          <Route path='donatePage' element={<DonatePage />} />
+          <Route path={ROUTE_PATH.DONATE_PAGE} element={<DonatePage />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

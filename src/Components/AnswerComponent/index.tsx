@@ -19,11 +19,6 @@ const AnswerComponent = () => {
           alert('다음 질문을 불러오는데 실패했습니다.');
           return;
         }
-        const goEndPage = data.data.isOver;
-
-        if (goEndPage) {
-          navigate(`${ROUTE_PATH.END_PAGE}`);
-        }
         setApiResult(data);
         navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`);
       },

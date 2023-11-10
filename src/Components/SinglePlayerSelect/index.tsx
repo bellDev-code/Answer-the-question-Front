@@ -31,12 +31,16 @@ const SinglePlayerSelect = () => {
 
   const handlePass = () => {
     const newRound = gameInfoResult?.data.currentRound;
+    const goEndPage = gameInfoResult?.data.isOver;
 
     if (newRound !== undefined && newRound !== currentRound) {
       setCurrentRound(newRound);
       navigate(ROUTE_PATH.BM_PAGE);
     } else {
       navigate(ROUTE_PATH.ANSWER_PAGE);
+    }
+    if (goEndPage) {
+      navigate(`${ROUTE_PATH.END_PAGE}`);
     }
   };
 
