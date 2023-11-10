@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/usePlayerStore';
-import useApiStore from '@Store/useApiStore';
+import useGameInfoStore from '@Store/useGameInfoStore';
 import { ROUTE_PATH } from '@Config/constant';
 
 const SinglePlayerSelect = () => {
@@ -15,7 +15,7 @@ const SinglePlayerSelect = () => {
     viewNames,
     setSelectedName,
   } = useSingleInputStore();
-  const { apiResult } = useApiStore();
+  const { gameInfoResult, currentRound, setCurrentRound } = useGameInfoStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,14 +30,21 @@ const SinglePlayerSelect = () => {
   };
 
   const handlePass = () => {
-    navigate(ROUTE_PATH.ANSWER_PAGE);
+    const newRound = gameInfoResult?.data.currentRound;
+
+    if (newRound !== undefined && newRound !== currentRound) {
+      setCurrentRound(newRound);
+      navigate(ROUTE_PATH.BM_PAGE);
+    } else {
+      navigate(ROUTE_PATH.ANSWER_PAGE);
+    }
   };
 
   return (
     <>
       <div className='sm: flex flex-col py-5 items-center justify-between'>
         <div>
-          <div>{apiResult?.data.selectedQuestion.text}</div>
+          <div>{gameInfoResult?.data.selectedQuestion.text}</div>
         </div>
         <div className='sm: h-[120px] w-3/5 my-5 px-4 overflow-auto'>
           {players.map((player, index) => (

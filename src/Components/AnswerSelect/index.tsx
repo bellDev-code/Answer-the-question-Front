@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAnswerSelectStore from '@Store/useAnswerSelectStore';
 import { useStartGameQuery } from '@Api/singleGame';
-import useApiStore from '@Store/useApiStore';
+import useApiStore from '@Store/useGameInfoStore';
 import { IRequestGameStartData, TPlatSelectionType } from '@Api/types';
 import { ROUTE_PATH } from '@Config/constant';
 

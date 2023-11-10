@@ -1,18 +1,20 @@
 import { ROUTE_PATH } from '@Config/constant';
-import useApiStore from '@Store/useApiStore';
+import gameInfoStore from '@Store/useGameInfoStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const BmPage = () => {
   const navigate = useNavigate();
-  const { apiResult } = useApiStore();
+  const { gameInfoResult, setCurrentRound } = gameInfoStore();
 
   const handleClick = () => {
     navigate('/donatePage');
   };
 
   const handleKeepClick = () => {
-    navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`, { state: { apiResult } });
+    const newRound = gameInfoResult?.data.currentRound ?? 0;
+    setCurrentRound(newRound);
+    navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`, { state: { gameInfoResult } });
   };
 
   return (

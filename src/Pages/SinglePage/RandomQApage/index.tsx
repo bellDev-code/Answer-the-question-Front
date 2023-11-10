@@ -1,12 +1,12 @@
 import { useQuestionListMutation } from '@Api/singleGame';
 import { ROUTE_PATH } from '@Config/constant';
-import useApiStore from '@Store/useApiStore';
+import GameInfoStore from '@Store/useGameInfoStore';
 import usePlayerStore from '@Store/usePlayerStore';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RandomQApage = () => {
-  const { apiResult, setApiResult } = useApiStore();
+  const { gameInfoResult, setApiResult } = GameInfoStore();
   const { randomSelectedName, setRandomSelectedName } = usePlayerStore();
   const { mutate: nextQuestionMutate } = useQuestionListMutation();
   const navigate = useNavigate();
@@ -15,15 +15,15 @@ const RandomQApage = () => {
     const fetchData = async () => {
       await setRandomSelectedName();
 
-      if (apiResult?.data.isOver === true) {
+      if (gameInfoResult?.data.isOver === true) {
         navigate(`${ROUTE_PATH.END_PAGE}`);
       }
     };
     fetchData();
-  }, [apiResult, navigate, setRandomSelectedName]);
+  }, [gameInfoResult, navigate, setRandomSelectedName]);
 
   const handlePass = () => {
-    nextQuestionMutate(apiResult?.data._id || '', {
+    nextQuestionMutate(gameInfoResult?.data._id || '', {
       onSuccess: (data) => {
         if (data.code !== 200) {
           alert('다음 질문을 불러오는데 실패했습니다.');
@@ -45,7 +45,7 @@ const RandomQApage = () => {
   return (
     <div>
       <div className='sm: flex flex-col p-10 items-center justify-center'>
-        <div className='sm: text-2xl'>{apiResult?.data.selectedQuestion.text}</div>
+        <div className='sm: text-2xl'>{gameInfoResult?.data.selectedQuestion.text}</div>
         <div className='sm: text-xl p-10'>{randomSelectedName}</div>
       </div>
       <div className='sm: flex justify-end p-10 '>
