@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ROUTE_PATH } from './Config/constant';
 import EndPage from '@Pages/SinglePage/EndPage';
 import DonatePage from '@Pages/SinglePage/DonatePage';
+import BmPage from '@Pages/SinglePage/BmPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,10 +32,11 @@ const App = () => {
           <Route path='/singlePage/answerSelect/selectQApage' element={<SelectQApage />} />
           <Route path='/singlePage/answerSelect/selectQApage/answerPage' element={<AnswerPage />} />
           <Route
-            path='/singlePage/answerSelect/selectQApage/answerPage/end'
-            element={<EndPage />}
+            path='/singlePage/answerSelect/selectQApage/answerPage/BmPage'
+            element={<BmPage />}
           />
           <Route path='/singlePage/answerSelect/randomAQpage' element={<RandomQApage />} />
+          <Route path={ROUTE_PATH.END_PAGE} element={<EndPage />} />
           <Route path='donatePage' element={<DonatePage />} />
         </Routes>
       </BrowserRouter>

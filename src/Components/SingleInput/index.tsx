@@ -4,8 +4,7 @@ import useSingleInputStore from '@Store/usePlayerStore';
 import { ROUTE_PATH } from '@Config/constant';
 
 const SingleInput = () => {
-  const { username, players, isButtonEnabled, setName, addName, deleteName } =
-    useSingleInputStore();
+  const { username, players, setName, addName, deleteName } = useSingleInputStore();
 
   const navigate = useNavigate();
 
@@ -66,7 +65,7 @@ const SingleInput = () => {
         <button
           onClick={handleNext}
           className='sm: bg-black text-white w-20 p-1 rounded-xl disabled:bg-gray-400'
-          disabled={!isButtonEnabled}
+          disabled={players.length < 2}
         >
           다음
         </button>

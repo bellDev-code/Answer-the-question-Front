@@ -1,9 +1,9 @@
 import { useQuestionListMutation } from '@Api/singleGame';
 import useApiStore from '@Store/useApiStore';
 import useSingleInputStore from '@Store/usePlayerStore';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE_PATH } from '../../Config/constant';
+import { ROUTE_PATH } from '@Config/constant';
 
 const AnswerComponent = () => {
   const navigate = useNavigate();
@@ -11,18 +11,6 @@ const AnswerComponent = () => {
   const { apiResult, setApiResult } = useApiStore();
   const { selectedName } = useSingleInputStore();
   const { mutate: nextQuestionMutate } = useQuestionListMutation();
-
-  useEffect(() => {
-    try {
-      const goEndPage = apiResult?.data.isOver === true;
-
-      if (goEndPage) {
-        navigate(`${ROUTE_PATH.END_PAGE}`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  });
 
   const handlePass = () => {
     nextQuestionMutate(apiResult?.data._id || '', {
@@ -32,6 +20,18 @@ const AnswerComponent = () => {
           alert('다음 질문을 불러오는데 실패했습니다.');
           return;
         }
+        const goEndPage = data.data.isOver;
+        console.log(goEndPage);
+        if (goEndPage) {
+          console.log(goEndPage);
+          navigate(`${ROUTE_PATH.END_PAGE}`);
+        }
+        console.log(data.data.currentRound, apiResult?.data.currentRound);
+        if (data.data.currentRound !== apiResult?.data.currentRound) {
+          console.log(data.data.currentRound, apiResult?.data.currentRound);
+          navigate(`${ROUTE_PATH.BM_PAGE}`);
+        }
+
         setApiResult(data);
         navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`);
       },
