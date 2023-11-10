@@ -7,6 +7,15 @@ const BmPage = () => {
   const navigate = useNavigate();
   const { useShownPage, setUseShownPage } = useShownStore();
 
+  const changeTypeClick = () => {
+    setUseShownPage(true);
+    if (useShownPage) {
+      navigate(`${ROUTE_PATH.RANDOM_QA_PAGE}`);
+    } else {
+      navigate(`${ROUTE_PATH.DONATE_PAGE}`);
+    }
+  };
+
   const keepTypeClick = () => {
     setUseShownPage(true);
 
@@ -25,7 +34,7 @@ const BmPage = () => {
           <p>질문 대상자 선정 방식을 변경 하시거나 다음 라운드를 진행할 수 있어요</p>
         </div>
         <div className='sm: flex py-10 gap-4'>
-          <button className='sm: bg-black text-white w-24 p-1 rounded-xl'>
+          <button onClick={changeTypeClick} className='sm: bg-black text-white w-24 p-1 rounded-xl'>
             선정 방식을 변경할래요
           </button>
           <button onClick={keepTypeClick} className='sm: bg-black text-white w-24 p-1 rounded-xl'>

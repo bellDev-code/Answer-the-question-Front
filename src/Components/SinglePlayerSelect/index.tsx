@@ -47,9 +47,7 @@ const SinglePlayerSelect = () => {
   return (
     <>
       <div className='sm: flex flex-col py-5 items-center justify-between'>
-        <div>
-          <div>{gameInfoResult?.data.selectedQuestion.text}</div>
-        </div>
+        <div className='sm text-xl p-10'>{gameInfoResult?.data.selectedQuestion.text}</div>
         <div className='sm: h-[120px] w-3/5 my-5 px-4 overflow-auto'>
           {players.map((player, index) => (
             <div
