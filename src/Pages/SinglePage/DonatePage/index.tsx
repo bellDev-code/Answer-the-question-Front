@@ -1,6 +1,21 @@
+import { ROUTE_PATH } from '@Config/constant';
+import gameInfoStore from '@Store/useGameInfoStore';
+import { useShownStore } from '@Store/useShownPageStore';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DonatePage = () => {
+  const { gameInfoResult, setCurrentRound } = gameInfoStore();
+  const { setUseShownPage } = useShownStore();
+  const navigate = useNavigate();
+
+  const handleKeepClick = () => {
+    setUseShownPage(true);
+    const newRound = gameInfoResult?.data.currentRound ?? 0;
+    setCurrentRound(newRound);
+    navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`, { state: { gameInfoResult } });
+  };
+
   return (
     <div>
       <div className='sm: flex flex-col p-10'>
@@ -12,7 +27,9 @@ const DonatePage = () => {
           <p>qr 시스템</p>
         </div>
         <div className='sm: flex justify-end'>
-          <button className='sm: bg-black text-white w-24 p-1 rounded-xl'>시작</button>
+          <button onClick={handleKeepClick} className='sm: bg-black text-white w-24 p-1 rounded-xl'>
+            시작
+          </button>
         </div>
       </div>
     </div>
