@@ -1,13 +1,13 @@
 import { useGameIdDetailQuery } from '@Api/singleGame';
 import gameInfoStore from '@Store/useGameInfoStore';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useGameId } from './useGetGameId';
 
 const useSetGameId = () => {
   const { gameInfoResult, setApiResult } = gameInfoStore();
   const gameId = useGameId() || gameInfoResult?._id;
 
-  const { data: gameInfo } = useGameIdDetailQuery(gameId || '');
+  const { data: gameInfo, isLoading, isError } = useGameIdDetailQuery(gameId || '');
 
   useEffect(() => {
     if (!gameInfoResult?._id) {
@@ -16,7 +16,10 @@ const useSetGameId = () => {
     }
   }, [location, gameInfoResult?._id, gameInfo]);
 
-  return <div></div>;
+  return {
+    isLoading,
+    isError,
+  };
 };
 
 export default useSetGameId;

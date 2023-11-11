@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '@Pages/HomePage';
 import SingleDevicePage from '@Pages/SinglePage';
-import AnswerSelect from '@Pages/AnswerSelectPage';
+import SelectPlayerTypePage from '@Pages/SelectPlayerTypePage';
 import SelectQApage from '@Pages/SelectQApage';
 import AnswerPage from '@Pages/AnswerPage';
 import { ROUTE_PATH } from './Config/constant';
 import EndPage from '@Pages/EndPage';
 import DonatePage from '@Pages/DonatePage';
-import BmPage from '@Pages/ChangePlayerTypePage';
+import ChangePlayerTypePage from '@Pages/ChangePlayerTypePage';
 import MultiDevicePage from '@Pages/MultiPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,7 +29,7 @@ const App = () => {
 
           <Route
             path={`${ROUTE_PATH.SINGLE_PAGE}${ROUTE_PATH.ANSWER_SELECT}`}
-            element={<AnswerSelect />}
+            element={<SelectPlayerTypePage />}
           />
           <Route
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.SELECT_QA_PAGE}`}
@@ -41,7 +41,7 @@ const App = () => {
           />
           <Route
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.BM_PAGE}`}
-            element={<BmPage />}
+            element={<ChangePlayerTypePage />}
           />
 
           <Route

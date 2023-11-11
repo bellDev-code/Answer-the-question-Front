@@ -5,22 +5,22 @@ interface ApiStore {
   gameInfoResult: IResponseGameInfo | null;
   gameTypeData: IRequestGameStartData | null;
   playerSelectionType: TPlaySelectionType | null;
+  currentRound: number;
+
   setApiResult: (result: IResponseGameInfo) => void;
   setCurrentRound: (round: number) => void;
   setPlayerSelectionType: (type: TPlaySelectionType) => void;
-  currentRound: number;
-  isFirstGame: boolean;
 }
 
 const gameInfoStore = create<ApiStore>((set) => ({
   gameInfoResult: null,
   gameTypeData: null,
   playerSelectionType: null,
+  currentRound: 1,
+
   setApiResult: (result) => set({ gameInfoResult: result }),
   setCurrentRound: (round) => set({ currentRound: round }),
-  currentRound: 1,
   setPlayerSelectionType: (type) => set({ playerSelectionType: type }),
-  isFirstGame: true,
 }));
 
 export default gameInfoStore;

@@ -36,6 +36,8 @@ export interface IResponseGameInfo {
   gameType: TGameType;
   playerSelectionType: TPlayerSelectionType;
   players: IPlayer[];
+  currentQuestionIndex: number;
+  questionLength: number;
 }
 
 export interface IResponseBase<T> {

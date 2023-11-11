@@ -1,15 +1,9 @@
+import SelectPlayerComponent from '@Components/SelectPlayer';
 import gameInfoStore from '@Store/useGameInfoStore';
-import useSingleInputStore from '@Store/usePlayerStore';
 import React from 'react';
 
 const ShowPlayerComponent = () => {
-  const { gameInfoResult, isFirstGame } = gameInfoStore();
-  const { setName, setSelectedName, players, selectedName } = useSingleInputStore();
-
-  const handleNameClick = (name: string) => {
-    setName(name);
-    setSelectedName(name);
-  };
+  const { gameInfoResult } = gameInfoStore();
 
   const renderRandomPlayer = () => {
     return (
@@ -20,21 +14,7 @@ const ShowPlayerComponent = () => {
   };
 
   const renderDirectPlayer = () => {
-    return (
-      <div className='w-full max-h-96 my-5 overflow-auto'>
-        {players.map((player, index) => (
-          <div
-            key={index}
-            className={`rounded-md px-6 py-1 ${
-              selectedName === player.username ? 'bg-black text-white w-full' : ''
-            }`}
-            onClick={() => handleNameClick(player.username)}
-          >
-            <span>{index + 1}.</span> {player.username}
-          </div>
-        ))}
-      </div>
-    );
+    return <SelectPlayerComponent />;
   };
 
   const renderPlayer = () => {
@@ -45,8 +25,10 @@ const ShowPlayerComponent = () => {
     }
   };
 
+  const isFirstGame = gameInfoResult?.currentQuestionIndex === 0;
+
   return (
-    <div>
+    <>
       {isFirstGame ? (
         <div className='rounded-md px-6 py-1 bg-black text-white'>
           {gameInfoResult?.selectedPlayer.username}
@@ -54,7 +36,7 @@ const ShowPlayerComponent = () => {
       ) : (
         renderPlayer()
       )}
-    </div>
+    </>
   );
 };
 

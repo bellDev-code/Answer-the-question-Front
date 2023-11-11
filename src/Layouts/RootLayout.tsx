@@ -10,9 +10,7 @@ const RootLayout = ({ children }: IProps) => {
   return (
     <div className='w-full h-screen flex flex-col border overflow-hidden'>
       <Header />
-      <div className='overflow-hidden h-full w-full'>
-        <div className='px-6 py-10'>{children}</div>
-      </div>
+      <div className='overflow-hidden h-full w-full relative p-6'>{children}</div>
       {/* <Bottom /> */}
     </div>
   );

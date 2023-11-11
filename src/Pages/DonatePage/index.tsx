@@ -1,19 +1,20 @@
-import { ROUTE_PATH } from '@Config/constant';
+import { BaseButton } from '@Components/atom/button/BaseButton';
+import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
 import gameInfoStore from '@Store/useGameInfoStore';
-import { useShownStore } from '@Store/useShownPageStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const DonatePage = () => {
   const { gameInfoResult, setCurrentRound } = gameInfoStore();
-  const { setUseShownPage } = useShownStore();
+
   const navigate = useNavigate();
 
   const handleKeepClick = () => {
-    setUseShownPage(true);
-    const newRound = gameInfoResult?.data.currentRound ?? 0;
+    if (!gameInfoResult?._id) return navigate(ROUTE_PATH.HOME);
+
+    const newRound = gameInfoResult?.currentRound ?? 0;
     setCurrentRound(newRound);
-    navigate(`${ROUTE_PATH.SELECT_QA_PAGE}`, { state: { gameInfoResult } });
+    navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id).SELECT_QA_PAGE);
   };
 
   return (
@@ -27,9 +28,12 @@ const DonatePage = () => {
           <p>qr 시스템</p>
         </div>
         <div className='sm: flex justify-end'>
-          <button onClick={handleKeepClick} className='sm: bg-black text-white w-24 p-1 rounded-xl'>
+          <BaseButton
+            onClick={handleKeepClick}
+            className='sm: bg-black text-white w-24 p-1 rounded-xl'
+          >
             계속하기
-          </button>
+          </BaseButton>
         </div>
       </div>
     </div>

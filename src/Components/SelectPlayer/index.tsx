@@ -2,7 +2,11 @@ import React from 'react';
 import usePlayerStore from '@Store/usePlayerStore';
 import gameInfoStore from '@Store/useGameInfoStore';
 
-const SelectPlayerComponent = () => {
+interface IProps {
+  className?: string;
+}
+
+const SelectPlayerComponent = ({ className }: IProps) => {
   const { setSelectedName, players, selectedName } = usePlayerStore();
   const { gameInfoResult } = gameInfoStore();
 
@@ -15,7 +19,7 @@ const SelectPlayerComponent = () => {
   );
 
   return (
-    <div className='w-full max-h-96 my-5 overflow-auto'>
+    <div className={`w-full max-h-96 overflow-auto ${className}`}>
       {showPlayer.map((player, index) => (
         <div
           key={index}

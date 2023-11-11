@@ -7,6 +7,7 @@ import useApiStore from '@Store/useGameInfoStore';
 import { IRequestGameStartData, TPlaySelectionType } from '@Api/types';
 import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
 import { toast } from '@Components/toastify/toastify';
+import { BaseButton } from '@Components/atom/button/BaseButton';
 
 const AnswerSelectPage = () => {
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ const AnswerSelectPage = () => {
       });
     }
   };
+
   return (
     <div className='sm: h-screen'>
       <div className='sm: flex flex-col items-center w-full gap-8'>
@@ -88,8 +90,8 @@ const AnswerSelectPage = () => {
           </button>
         </div>
         <div className='sm: flex gap-4'>
-          <button onClick={handlePrevious}>이전</button>
-          <button onClick={handleStart}>시작</button>
+          <BaseButton onClick={handlePrevious}>이전</BaseButton>
+          <BaseButton onClick={handleStart}>시작</BaseButton>
         </div>
       </div>
     </div>

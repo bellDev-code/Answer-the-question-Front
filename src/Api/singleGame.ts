@@ -6,6 +6,7 @@ import {
   IRequestGameStartData,
   IResponseBase,
   IResponseGameInfo,
+  TPlaySelectionType,
 } from './types';
 import { AxiosError, AxiosResponse } from 'axios';
 
@@ -87,5 +88,35 @@ export const useGameIdDetailQuery = (gameId: string) => {
     queryKey: [QUESTION_LIST_QUERY_KEY, gameId],
     queryFn: () => getGameIdDetail(gameId),
     enabled: !!gameId,
+  });
+};
+
+interface IUpdatePlayerSelectionTypeParams {
+  gameId: string;
+  playerSelectionType: TPlaySelectionType;
+}
+
+const updatePlayerSelectionType = async ({
+  gameId,
+  playerSelectionType,
+}: IUpdatePlayerSelectionTypeParams) => {
+  const response: AxiosResponse<
+    IResponseBase<IResponseGameInfo>,
+    IResponseGameInfo
+  > = await client.patch(`${prefix}/player-type`, {
+    gameId,
+    playerSelectionType,
+  });
+
+  return response.data;
+};
+
+export const useUpdatePlayerSelectionTypeMutation = () => {
+  return useMutation<
+    IResponseBase<IResponseGameInfo>,
+    AxiosError<IErrorResponse>,
+    IUpdatePlayerSelectionTypeParams
+  >({
+    mutationFn: updatePlayerSelectionType,
   });
 };
