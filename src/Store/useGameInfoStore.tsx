@@ -1,19 +1,15 @@
-import {
-  IResponseGameInfo,
-  IResponseBase,
-  IRequestGameStartData,
-  TPlatSelectionType,
-} from '@Api/types';
+import { IResponseGameInfo, IRequestGameStartData, TPlaySelectionType } from '@Api/types';
 import { create } from 'zustand';
 
 interface ApiStore {
-  gameInfoResult: IResponseBase<IResponseGameInfo> | null;
+  gameInfoResult: IResponseGameInfo | null;
   gameTypeData: IRequestGameStartData | null;
-  playerSelectionType: TPlatSelectionType | null;
-  setApiResult: (result: IResponseBase<IResponseGameInfo>) => void;
+  playerSelectionType: TPlaySelectionType | null;
+  setApiResult: (result: IResponseGameInfo) => void;
   setCurrentRound: (round: number) => void;
-  setPlayerSelectionType: (type: TPlatSelectionType) => void;
+  setPlayerSelectionType: (type: TPlaySelectionType) => void;
   currentRound: number;
+  isFirstGame: boolean;
 }
 
 const gameInfoStore = create<ApiStore>((set) => ({
@@ -24,6 +20,7 @@ const gameInfoStore = create<ApiStore>((set) => ({
   setCurrentRound: (round) => set({ currentRound: round }),
   currentRound: 1,
   setPlayerSelectionType: (type) => set({ playerSelectionType: type }),
+  isFirstGame: true,
 }));
 
 export default gameInfoStore;

@@ -1,4 +1,4 @@
-import Bottom from '@Components/Bottom';
+// import Bottom from '@Components/Bottom';
 import Header from '@Components/Header';
 import React from 'react';
 
@@ -10,8 +10,10 @@ const RootLayout = ({ children }: IProps) => {
   return (
     <div className='w-full h-screen flex flex-col border overflow-hidden'>
       <Header />
-      <div className='overflow-hidden h-full w-full'>{children}</div>
-      <Bottom />
+      <div className='overflow-hidden h-full w-full'>
+        <div className='px-6 py-10'>{children}</div>
+      </div>
+      {/* <Bottom /> */}
     </div>
   );
 };

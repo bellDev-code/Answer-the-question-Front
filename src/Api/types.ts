@@ -1,12 +1,14 @@
 export type IPlayer = {
   username: string;
 };
-export type TPlatSelectionType = 'direct' | 'random';
+export type TPlaySelectionType = 'direct' | 'random';
 export type TGameCategory = 'serious' | 'funny' | 'crazy';
+export type TGameType = 'single' | 'multi';
+export type TPlayerSelectionType = 'direct' | 'random';
 
 export interface IRequestGameStartData {
   players: IPlayer[];
-  playerSelectionType: TPlatSelectionType;
+  playerSelectionType: TPlaySelectionType;
   category: TGameCategory;
 }
 
@@ -31,10 +33,18 @@ export interface IResponseGameInfo {
   selectedPlayer: IPlayer;
   isOver: boolean;
   currentRound: number;
+  gameType: TGameType;
+  playerSelectionType: TPlayerSelectionType;
+  players: IPlayer[];
 }
 
 export interface IResponseBase<T> {
   code: number;
   message: string;
   data: T;
+}
+
+export interface IErrorResponse {
+  code: number;
+  message: string;
 }
