@@ -1,11 +1,9 @@
 import React from 'react';
-import SelectDevice from '@Components/SelectDevice';
-import Header from '@Components/Header';
+import SelectDevice from '@Pages/HomePage/SelectDevice';
 
 const Home = () => {
   return (
-    <div>
-      <Header />
+    <div className='w-full h-screen flex flex-col'>
       <SelectDevice />
     </div>
   );

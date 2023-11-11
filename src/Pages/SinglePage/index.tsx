@@ -1,4 +1,4 @@
-import SingleInput from '@Components/SingleInput';
+import SingleInput from '@Pages/SinglePage/SingleInput';
 import React from 'react';
 
 const SinglePage = () => {

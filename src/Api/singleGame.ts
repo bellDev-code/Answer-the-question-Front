@@ -1,6 +1,13 @@
 import { client } from '@Api/client';
-import { useMutation } from '@tanstack/react-query';
-import { IRequestGameStartData, IResponseBase, IResponseGameInfo } from './types';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  IErrorResponse,
+  IPlayer,
+  IRequestGameStartData,
+  IResponseBase,
+  IResponseGameInfo,
+  TPlaySelectionType,
+} from './types';
 import { AxiosError, AxiosResponse } from 'axios';
 
 export const QUESTION_LIST_QUERY_KEY = 'questionList';
@@ -25,25 +32,91 @@ const startGame = async ({
 };
 
 export const useStartGameQuery = () => {
-  return useMutation<IResponseBase<IResponseGameInfo>, AxiosError, IRequestGameStartData>({
+  return useMutation<
+    IResponseBase<IResponseGameInfo>,
+    AxiosError<IErrorResponse>,
+    IRequestGameStartData
+  >({
     mutationFn: startGame,
   });
 };
 
 // 싱글 게임 다음 질문 가져오기
-const getQuestionList = async (gameId: string) => {
-  const response: AxiosResponse<IResponseBase<IResponseGameInfo>, string> = await client.post(
-    `${prefix}/next-question`,
-    {
-      gameId,
-    },
-  );
+
+interface IGetQuestionListParams {
+  gameId: string;
+  selectedPlayer?: IPlayer;
+}
+
+const getQuestionList = async ({ gameId, selectedPlayer }: IGetQuestionListParams) => {
+  const response: AxiosResponse<
+    IResponseBase<IResponseGameInfo>,
+    IGetQuestionListParams
+  > = await client.post(`${prefix}/next-question`, {
+    gameId,
+    selectedPlayer,
+  });
 
   return response.data;
 };
 
 export const useQuestionListMutation = () => {
-  return useMutation<IResponseBase<IResponseGameInfo>, AxiosError, string>({
+  return useMutation<
+    IResponseBase<IResponseGameInfo>,
+    AxiosError<IErrorResponse>,
+    IGetQuestionListParams
+  >({
     mutationFn: getQuestionList,
+  });
+};
+
+const getGameIdDetail = async (gameId: string) => {
+  const response: AxiosResponse<
+    IResponseBase<IResponseGameInfo>,
+    IResponseGameInfo
+  > = await client.get(`${prefix}/${gameId}`);
+
+  return response.data;
+};
+
+export const useGameIdDetailQuery = (gameId: string) => {
+  return useQuery<
+    IResponseBase<IResponseGameInfo>,
+    AxiosError<IErrorResponse>,
+    IResponseBase<IResponseGameInfo>
+  >({
+    queryKey: [QUESTION_LIST_QUERY_KEY, gameId],
+    queryFn: () => getGameIdDetail(gameId),
+    enabled: !!gameId,
+  });
+};
+
+interface IUpdatePlayerSelectionTypeParams {
+  gameId: string;
+  playerSelectionType: TPlaySelectionType;
+}
+
+const updatePlayerSelectionType = async ({
+  gameId,
+  playerSelectionType,
+}: IUpdatePlayerSelectionTypeParams) => {
+  const response: AxiosResponse<
+    IResponseBase<IResponseGameInfo>,
+    IResponseGameInfo
+  > = await client.patch(`${prefix}/player-type`, {
+    gameId,
+    playerSelectionType,
+  });
+
+  return response.data;
+};
+
+export const useUpdatePlayerSelectionTypeMutation = () => {
+  return useMutation<
+    IResponseBase<IResponseGameInfo>,
+    AxiosError<IErrorResponse>,
+    IUpdatePlayerSelectionTypeParams
+  >({
+    mutationFn: updatePlayerSelectionType,
   });
 };
