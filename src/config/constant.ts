@@ -1,11 +1,24 @@
 export const ROUTE_PATH = Object.freeze({
   HOME: '/',
   SINGLE_PAGE: '/singlePage',
-  ANSWER_SELECT: '/singlePage/answerSelect',
-  SELECT_QA_PAGE: '/singlePage/answerSelect/selectQApage',
-  ANSWER_PAGE: '/singlePage/answerSelect/selectQApage/answerPage',
-  BM_PAGE: '/singlePage/answerSelect/selectQApage/answerPage/BmPage',
+  ANSWER_SELECT: '/answerSelect',
+  SELECT_QA_PAGE: '/selectQApage',
+  ANSWER_PAGE: '/answerPage',
+  BM_PAGE: '/BmPage',
   END_PAGE: '/end',
-  RANDOM_QA_PAGE: '/singlePage/answerSelect/randomAQpage',
+  RANDOM_QA_PAGE: '/randomAQpage',
   DONATE_PAGE: '/donate',
+});
+
+export const BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID = `${ROUTE_PATH.SINGLE_PAGE}/:gameId`;
+
+export const DYNAMIC_ROUTE_PATH = (gameId: string) => ({
+  SINGLE_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.SINGLE_PAGE}`,
+  ANSWER_SELECT: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.ANSWER_SELECT}`,
+  SELECT_QA_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.SELECT_QA_PAGE}`,
+  ANSWER_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.ANSWER_PAGE}`,
+  BM_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.BM_PAGE}`,
+  END_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.END_PAGE}`,
+  RANDOM_QA_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.RANDOM_QA_PAGE}`,
+  DONATE_PAGE: `${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}/${gameId}${ROUTE_PATH.DONATE_PAGE}`,
 });
