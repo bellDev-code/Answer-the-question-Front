@@ -25,7 +25,8 @@
       "@Layouts/*":["src/Layouts/*"],
       "@Pages/*":["src/Pages/*"],
       "@Store/*":["src/Store/*"],
-      "@Api/*":["src/Api/*"]
+      "@Api/*":["src/Api/*"],
+      "@Config/*": ["src/Config/*"]
     }
   },
   "types": ["node"]

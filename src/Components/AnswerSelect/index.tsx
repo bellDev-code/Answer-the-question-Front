@@ -1,11 +1,11 @@
-import useSingleInputStore from '@Store/useSingleInputStore';
+import useSingleInputStore from '@Store/usePlayerStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAnswerSelectStore from '@Store/useAnswerSelectStore';
 import { useStartGameQuery } from '@Api/singleGame';
-import useApiStore from '@Store/useApiStore';
-import { IRequestGameStartData } from '@Api/types';
-import { ROUTE_PATH } from 'src/config/constant';
+import useApiStore from '@Store/useGameInfoStore';
+import { IRequestGameStartData, TPlatSelectionType } from '@Api/types';
+import { ROUTE_PATH } from '@Config/constant';
 
 const AnswerSelect = () => {
   const navigate = useNavigate();
@@ -29,9 +29,15 @@ const AnswerSelect = () => {
 
   const handleStart = async () => {
     if (selectedRoute) {
+      let playerSelectionType: TPlatSelectionType = 'direct';
+
+      if (selectedRoute === ROUTE_PATH.RANDOM_QA_PAGE) {
+        playerSelectionType = 'random';
+      }
+
       const gameStartData: IRequestGameStartData = {
         players,
-        playerSelectionType: 'direct',
+        playerSelectionType,
         category: 'serious',
       };
 

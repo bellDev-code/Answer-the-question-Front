@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useSingleInputStore from '@Store/useSingleInputStore'; // Import your store
-import useApiStore from '@Store/useApiStore';
-import { ROUTE_PATH } from 'src/config/constant';
+import useSingleInputStore from '@Store/usePlayerStore';
+import useGameInfoStore from '@Store/useGameInfoStore';
+import { ROUTE_PATH } from '@Config/constant';
 
 const SinglePlayerSelect = () => {
-  const { players, username, disabled, setNames, setName, setDisabled, viewNames } =
-    useSingleInputStore();
-  const { apiResult } = useApiStore();
+  const {
+    players,
+    username,
+    disabled,
+    setNames,
+    setName,
+    setDisabled,
+    viewNames,
+    setSelectedName,
+  } = useSingleInputStore();
+  const { gameInfoResult, currentRound, setCurrentRound } = useGameInfoStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,19 +26,28 @@ const SinglePlayerSelect = () => {
   const handleNameClick = (name: string) => {
     setName(name);
     setDisabled(false);
+    setSelectedName(name);
   };
 
   const handlePass = () => {
-    navigate(ROUTE_PATH.ANSWER_PAGE);
+    const newRound = gameInfoResult?.data.currentRound;
+    const goEndPage = gameInfoResult?.data.isOver;
+
+    if (newRound !== undefined && newRound !== currentRound) {
+      setCurrentRound(newRound);
+      navigate(ROUTE_PATH.BM_PAGE);
+    } else {
+      navigate(ROUTE_PATH.ANSWER_PAGE);
+    }
+    if (goEndPage) {
+      navigate(`${ROUTE_PATH.END_PAGE}`);
+    }
   };
 
   return (
     <>
       <div className='sm: flex flex-col py-5 items-center justify-between'>
-        {/* 여기에서 selectedQuestion이 보여야함 */}
-        <div>
-          <div>{apiResult?.data.selectedQuestion.text}</div>
-        </div>
+        <div className='sm text-xl p-10'>{gameInfoResult?.data.selectedQuestion.text}</div>
         <div className='sm: h-[120px] w-3/5 my-5 px-4 overflow-auto'>
           {players.map((player, index) => (
             <div

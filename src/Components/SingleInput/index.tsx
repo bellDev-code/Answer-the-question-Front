@@ -1,10 +1,10 @@
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useSingleInputStore from '@Store/useSingleInputStore';
-import { ROUTE_PATH } from 'src/config/constant';
+import useSingleInputStore from '@Store/usePlayerStore';
+import { ROUTE_PATH } from '@Config/constant';
 
 const SingleInput = () => {
-  const { username, players, disabled, setName, addName } = useSingleInputStore();
+  const { username, players, setName, addName, deleteName } = useSingleInputStore();
 
   const navigate = useNavigate();
 
@@ -13,7 +13,16 @@ const SingleInput = () => {
   };
 
   const handleAddName = () => {
-    addName();
+    if (username.length > 1) {
+      addName();
+    }
+  };
+
+  const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && event.nativeEvent.isComposing === false) {
+      event.preventDefault();
+      handleAddName();
+    }
   };
 
   const handleNext = () => {
@@ -30,11 +39,7 @@ const SingleInput = () => {
             placeholder='이름을 입력해주세요.'
             value={username}
             onChange={handleNameChange}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                addName();
-              }
-            }}
+            onKeyDown={handleEnterKey}
           />
           <button className='sm: bg-black text-white w-20 p-1 rounded-xl' onClick={handleAddName}>
             추가
@@ -42,8 +47,13 @@ const SingleInput = () => {
         </div>
         <div className='sm: h-[120px] w-3/5 my-5 overflow-auto'>
           {players.map((player, index) => (
-            <div key={index}>
-              <span>{index + 1}.</span> {player.username}
+            <div className='sm: flex items-center justify-between' key={index}>
+              <div>
+                {index + 1}. {player.username}
+              </div>
+              <button onClick={() => deleteName(index)} className='sm: ml-2 py-1 px-4 text-red-600'>
+                X
+              </button>
             </div>
           ))}
         </div>
@@ -55,7 +65,7 @@ const SingleInput = () => {
         <button
           onClick={handleNext}
           className='sm: bg-black text-white w-20 p-1 rounded-xl disabled:bg-gray-400'
-          disabled={disabled}
+          disabled={players.length < 2}
         >
           다음
         </button>
