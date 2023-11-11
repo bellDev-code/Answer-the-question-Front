@@ -26,7 +26,7 @@ const SingleInput = () => {
   };
 
   const handleNext = () => {
-    navigate(ROUTE_PATH.ANSWER_SELECT);
+    navigate(`${ROUTE_PATH.SINGLE_PAGE}${ROUTE_PATH.ANSWER_SELECT}`);
   };
 
   return (

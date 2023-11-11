@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerComponent from '@Components/AnswerComponent';
+import AnswerComponent from '@Pages/AnswerPage/AnswerComponent';
 
 const AnswerPage = () => {
   return (

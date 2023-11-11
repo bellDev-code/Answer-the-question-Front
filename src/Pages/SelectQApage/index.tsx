@@ -4,7 +4,7 @@ import useSingleInputStore from '@Store/usePlayerStore';
 import useGameInfoStore from '@Store/useGameInfoStore';
 import { ROUTE_PATH } from '@Config/constant';
 
-const SinglePlayerSelect = () => {
+const SelectQApage = () => {
   const {
     players,
     username,
@@ -43,9 +43,8 @@ const SinglePlayerSelect = () => {
       navigate(`${ROUTE_PATH.END_PAGE}`);
     }
   };
-
   return (
-    <>
+    <div>
       <div className='sm: flex flex-col py-5 items-center justify-between'>
         <div className='sm text-xl p-10'>{gameInfoResult?.data.selectedQuestion.text}</div>
         <div className='sm: h-[120px] w-3/5 my-5 px-4 overflow-auto'>
@@ -76,8 +75,8 @@ const SinglePlayerSelect = () => {
           건내기
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
-export default SinglePlayerSelect;
+export default SelectQApage;

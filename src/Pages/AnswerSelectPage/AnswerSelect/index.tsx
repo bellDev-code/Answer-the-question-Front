@@ -6,6 +6,7 @@ import { useStartGameQuery } from '@Api/singleGame';
 import useApiStore from '@Store/useGameInfoStore';
 import { IRequestGameStartData, TPlatSelectionType } from '@Api/types';
 import { ROUTE_PATH } from '@Config/constant';
+import { toast } from '@Components/toastify/toastify';
 
 const AnswerSelect = () => {
   const navigate = useNavigate();
@@ -53,7 +54,11 @@ const AnswerSelect = () => {
         },
         onError: (error) => {
           // FIXME: 에러처리 서버 코드에 따라서 다르게 처리해야함
-          console.log(error);
+          switch (error.code) {
+            case 'ERR_NETWORK':
+              toast('네트워크 에러');
+              break;
+          }
         },
       });
     }

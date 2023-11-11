@@ -1,4 +1,4 @@
-import AnswerSelect from '@Components/AnswerSelect';
+import AnswerSelect from '@Pages/AnswerSelectPage/AnswerSelect';
 import React from 'react';
 
 const AnswerSelectPage = () => {

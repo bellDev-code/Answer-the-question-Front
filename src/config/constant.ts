@@ -1,6 +1,7 @@
 export const ROUTE_PATH = Object.freeze({
   HOME: '/',
   SINGLE_PAGE: '/singlePage',
+  MULTI_PAGE: '/multiPage',
   ANSWER_SELECT: '/answerSelect',
   SELECT_QA_PAGE: '/selectQApage',
   ANSWER_PAGE: '/answerPage',

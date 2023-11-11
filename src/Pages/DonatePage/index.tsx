@@ -28,7 +28,7 @@ const DonatePage = () => {
         </div>
         <div className='sm: flex justify-end'>
           <button onClick={handleKeepClick} className='sm: bg-black text-white w-24 p-1 rounded-xl'>
-            시작
+            계속하기
           </button>
         </div>
       </div>

@@ -29,22 +29,16 @@ const RuleModal = ({ open, handleClose }: RuleModalProps) => {
             overflow: 'auto',
           }}
         >
-          <div className='sm: flex justify-between items-center'>
-            <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <div className='sm:flex justify-between items-center'>
+            <h1 className='font-bold text-2xl mb-5' id='modal-modal-title'>
               게임 룰
-            </Typography>
+            </h1>
             <button onClick={handleClose} className='sm: px-2'>
               X
             </button>
           </div>
-          <Typography
-            id='modal-modal-description'
-            sx={{ mt: 2, display: 'flex', flexDirection: 'column' }}
-          >
-            <p className='sm: text-l'>1. 홈페이지에 접속한다.</p>
-            <p className='sm: text-l'>2. 싱글 디바이스와 멀티 디바이스 중에 선택한다.</p>
-          </Typography>
-          <Typography>
+
+          <Typography style={{ marginBottom: '3rem' }}>
             <p className='sm: text-xl my-3 font-semibold'>싱글 디바이스 게임 룰</p>
             <p className='sm: text-xs leading-normal'>
               1. 싱글 디바이스를 선택 할 경우 화면에 추가 버튼을 눌러 이름을 작성한다.
