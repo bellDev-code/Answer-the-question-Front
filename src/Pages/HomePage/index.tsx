@@ -15,10 +15,11 @@ const Home = () => {
             싱글 디바이스
           </button>
           <button
+            disabled
             onClick={() => navigate(ROUTE_PATH.MULTI_PAGE)}
             className='sm: bg-black text-white px-10 w-9/12 py-3 text-l rounded-xl'
           >
-            멀티 디바이스
+            멀티 디바이스 (예정)
           </button>
         </div>
       </div>
