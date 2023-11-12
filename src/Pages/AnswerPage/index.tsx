@@ -40,7 +40,6 @@ const AnswerPage = () => {
           }
         },
         onError: (error) => {
-          console.log(error);
           if (error.response?.data.message === 'Game is over') {
             navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id || '').END_PAGE);
           }
