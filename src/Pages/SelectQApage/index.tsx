@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/usePlayerStore';
 import useGameInfoStore from '@Store/useGameInfoStore';
-import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
+import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import QuestionAndAnswer from '@Components/QuestionAndAnswer';
 import GuideTextComponent from '@Components/GuideText';

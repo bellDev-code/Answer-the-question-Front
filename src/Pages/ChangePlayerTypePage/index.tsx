@@ -1,6 +1,6 @@
 import { useUpdatePlayerSelectionTypeMutation } from '@Api/singleGame';
 import { toast } from '@Components/toastify/toastify';
-import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
+import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import gameInfoStore from '@Store/useGameInfoStore';
 import React from 'react';

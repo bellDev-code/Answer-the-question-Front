@@ -1,5 +1,5 @@
 import { BaseButton } from '@Components/atom/button/BaseButton';
-import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
+import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import gameInfoStore from '@Store/useGameInfoStore';
 import React from 'react';

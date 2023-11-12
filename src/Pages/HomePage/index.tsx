@@ -1,4 +1,4 @@
-import { ROUTE_PATH } from '@Config/constant';
+import { ROUTE_PATH } from '@Configure/constant';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 

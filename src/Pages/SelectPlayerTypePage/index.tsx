@@ -5,7 +5,7 @@ import useAnswerSelectStore from '@Store/useAnswerSelectStore';
 import { useStartGameQuery } from '@Api/singleGame';
 import useApiStore from '@Store/useGameInfoStore';
 import { IRequestGameStartData, TPlaySelectionType } from '@Api/types';
-import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
+import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import { toast } from '@Components/toastify/toastify';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import PlayGameLayout from '@Layouts/PlayGameLayout';

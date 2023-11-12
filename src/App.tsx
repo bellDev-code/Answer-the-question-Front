@@ -5,7 +5,7 @@ import SingleDevicePage from '@Pages/SinglePage';
 import SelectPlayerTypePage from '@Pages/SelectPlayerTypePage';
 import SelectQApage from '@Pages/SelectQApage';
 import AnswerPage from '@Pages/AnswerPage';
-import { ROUTE_PATH } from './Config/constant';
+import { ROUTE_PATH } from './configure/constant';
 import EndPage from '@Pages/EndPage';
 import DonatePage from '@Pages/DonatePage';
 import ChangePlayerTypePage from '@Pages/ChangePlayerTypePage';

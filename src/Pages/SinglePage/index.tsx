@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/usePlayerStore';
-import { ROUTE_PATH } from '@Config/constant';
+import { ROUTE_PATH } from '@Configure/constant';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 
 const SinglePage = () => {

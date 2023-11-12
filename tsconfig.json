@@ -22,11 +22,11 @@
     "baseUrl": ".", // 이 경우는 tsconfig.json이 존재하는 루트 디렉토리를 기준으로 삼는다.
     "paths": {
       "@Components/*": ["src/Components/*"],
-      "@Layouts/*":["src/Layouts/*"],
-      "@Pages/*":["src/Pages/*"],
-      "@Store/*":["src/Store/*"],
-      "@Api/*":["src/Api/*"],
-      "@Config/*": ["src/Config/*"]
+      "@Layouts/*": ["src/Layouts/*"],
+      "@Pages/*": ["src/Pages/*"],
+      "@Store/*": ["src/Store/*"],
+      "@Api/*": ["src/Api/*"],
+      "@Configure/*": ["src/configure/*"]
     }
   },
   "types": ["node"]
