@@ -29,7 +29,13 @@ const AnswerPage = () => {
       {
         onSuccess: (data) => {
           if (data.code === 200) {
+            if (gameInfoResult?.currentRound !== data.data.currentRound) {
+              navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id || '').BM_PAGE);
+              setApiResult(data.data);
+              return;
+            }
             setApiResult(data.data);
+
             navigate(`${DYNAMIC_ROUTE_PATH(gameInfoResult?._id || '').SELECT_QA_PAGE}`);
           }
         },
@@ -53,7 +59,7 @@ const AnswerPage = () => {
           answer={gameInfoResult?.selectedPlayer.username || ''}
         />
 
-        {!isRandom && <SelectPlayerComponent />}
+        {!isRandom && <SelectPlayerComponent className='mb-6' />}
 
         <GuideTextComponent>
           답변을 한 뒤 다음 질문을 하기 위해 다음 사람을 선택 한 후 버튼을 눌러주세요

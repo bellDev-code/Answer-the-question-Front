@@ -1,6 +1,7 @@
 import { useUpdatePlayerSelectionTypeMutation } from '@Api/singleGame';
 import { toast } from '@Components/toastify/toastify';
 import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
+import PlayGameLayout from '@Layouts/PlayGameLayout';
 import gameInfoStore from '@Store/useGameInfoStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +41,7 @@ const ChangePlayerTypePage = () => {
   };
 
   return (
-    <div>
+    <PlayGameLayout>
       <div className='sm: flex flex-col p-10 items-center justify-center'>
         <h1 className='sm: text-2xl py-10'>모두가 답을 했어요!</h1>
         <div>
@@ -68,7 +69,7 @@ const ChangePlayerTypePage = () => {
           </button>
         </div>
       </div>
-    </div>
+    </PlayGameLayout>
   );
 };
 

@@ -9,30 +9,23 @@ import GuideTextComponent from '@Components/GuideText';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 
 const SelectQApage = () => {
-  const { selectedName, setSelectedName } = useSingleInputStore();
+  const { setSelectedName } = useSingleInputStore();
 
-  const { gameInfoResult, currentRound, setCurrentRound } = useGameInfoStore();
+  const { gameInfoResult } = useGameInfoStore();
   const navigate = useNavigate();
 
   const handlePass = () => {
-    const newRound = gameInfoResult?.currentRound;
     const goEndPage = gameInfoResult?.isOver;
 
+    setSelectedName('');
     if (!gameInfoResult?._id) {
-      setSelectedName('');
-      return navigate(ROUTE_PATH.HOME);
+      navigate(ROUTE_PATH.HOME);
+      return;
     }
 
-    if (newRound !== undefined && newRound !== currentRound) {
-      setSelectedName('');
-      setCurrentRound(newRound);
-      navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id).BM_PAGE);
-    } else {
-      setSelectedName('');
-      navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id).ANSWER_PAGE);
-    }
+    navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id).ANSWER_PAGE);
+
     if (goEndPage) {
-      setSelectedName('');
       navigate(`${DYNAMIC_ROUTE_PATH(gameInfoResult?._id).END_PAGE}`);
     }
   };
@@ -57,9 +50,7 @@ const SelectQApage = () => {
       </div>
 
       <div className='flex justify-end px-10'>
-        <BaseButton onClick={handlePass} disabled={isRandom ? false : selectedName === ''}>
-          건네기
-        </BaseButton>
+        <BaseButton onClick={handlePass}>건네기</BaseButton>
       </div>
     </PlayGameLayout>
   );

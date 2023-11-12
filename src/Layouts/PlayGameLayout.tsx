@@ -16,7 +16,7 @@ const PlayGameLayout = ({ children }: IProps) => {
       </div>
     );
   } else if (isError) {
-    return <>{children}</>;
+    return <div>새로 고침 후 다시 진행 해주세요.</div>;
   } else {
     return <>{children}</>;
   }
