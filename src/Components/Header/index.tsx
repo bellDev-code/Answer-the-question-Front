@@ -1,3 +1,4 @@
+import KakaoShare from '@Components/KakaoShared';
 import RuleModal from '@Components/modal/RuleModal';
 import React, { useState } from 'react';
 
@@ -13,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <div className='sm: px-4 py-2 border-b'>
+    <div className='sm: px-4 py-2 border-b flex justify-between'>
       <button
         className='sm:text-md bg-slate-700 py-1 px-3 text-white rounded-md'
         onClick={handleOpen}
@@ -22,6 +23,7 @@ const Header = () => {
       </button>
 
       <RuleModal open={open} handleClose={handleClose} />
+      <KakaoShare />
     </div>
   );
 };
