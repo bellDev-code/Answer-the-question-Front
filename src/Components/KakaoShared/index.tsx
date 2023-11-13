@@ -1,11 +1,5 @@
 import React from 'react';
 
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
-
 export default function KakaoShare() {
   const kakaoButton = async () => {
     if (window.Kakao) {
