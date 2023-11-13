@@ -1,15 +1,21 @@
 import React from 'react';
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export default function KakaoShare() {
   const kakaoButton = async () => {
     if (window.Kakao) {
-      const kakao = window.Kakao;
+      const shared = window.Kakao;
 
-      if (!kakao.isInitialized()) {
-        kakao.init('da9097fb608a8158e3b3aa48e8585256');
+      if (!shared.isInitialized()) {
+        shared.init('da9097fb608a8158e3b3aa48e8585256');
       }
 
-      kakao.Share.sendDefault({
+      shared.Share.sendDefault({
         objectType: 'feed',
         content: {
           title: '취중진담',
