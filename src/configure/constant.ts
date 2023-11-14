@@ -9,6 +9,7 @@ export const ROUTE_PATH = Object.freeze({
   END_PAGE: '/end',
   RANDOM_QA_PAGE: '/randomAQpage',
   DONATE_PAGE: '/donate',
+  MULTI_ROOM: '/multiRoomPage',
 });
 
 export const DYNAMIC_ROUTE_PATH = (gameId: string, questionIndex: number) => ({
