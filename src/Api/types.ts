@@ -12,6 +12,14 @@ export interface IRequestGameStartData {
   category: TGameCategory;
 }
 
+export interface IRequestMultiGameData {
+  gameType: TGameType;
+  isPlaying: boolean;
+  playerSelectionType: TPlaySelectionType;
+  category: TGameCategory;
+  players: IPlayer[];
+}
+
 export const QuestionCategoryObject = Object.freeze({
   serious: 'serious',
   funny: 'funny',
@@ -25,6 +33,18 @@ export interface IQuestion {
   category: TQuestionCategory;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface IResponseMultiInfo {
+  _id: string;
+  isOver: boolean;
+  currentRound: number;
+  gameType: TGameType;
+  playerSelectionType: TPlaySelectionType;
+  players: IPlayer[];
+  currentQuestionIndex: number;
+  questionLength: number;
+  isPlaying: boolean;
 }
 
 export interface IResponseGameInfo {
