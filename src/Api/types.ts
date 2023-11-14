@@ -13,8 +13,6 @@ export interface IRequestGameStartData {
 }
 
 export interface IRequestMultiGameData {
-  gameType: TGameType;
-  isPlaying: boolean;
   playerSelectionType: TPlaySelectionType;
   category: TGameCategory;
   players: IPlayer[];

@@ -7,19 +7,15 @@ const prefix = 'game/multi-game';
 
 // 방 생성
 const createRoom = async ({
-  gameType,
   players,
   playerSelectionType,
-  isPlaying,
   category,
 }: IRequestMultiGameData): Promise<IResponseBase<IResponseMultiInfo>> => {
   const response: AxiosResponse<
     IResponseBase<IResponseMultiInfo>,
     IRequestMultiGameData
   > = await client.post(`${prefix}/create`, {
-    gameType,
     players,
-    isPlaying,
     playerSelectionType,
     category,
   });

@@ -29,9 +29,7 @@ const MultiDevicePage = () => {
     }
 
     const createRoomData: IRequestMultiGameData = {
-      gameType: 'multi',
       players: [{ username: players }],
-      isPlaying: false,
       playerSelectionType: selectedType,
       category: 'serious',
     };
