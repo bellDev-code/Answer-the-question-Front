@@ -1,4 +1,4 @@
-import { ROUTE_PATH } from '@Config/constant';
+import { ROUTE_PATH } from '@Configure/constant';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const Home = () => {
             onClick={() => navigate(ROUTE_PATH.MULTI_PAGE)}
             className='sm: bg-black text-white px-10 w-9/12 py-3 text-l rounded-xl'
           >
-            멀티 디바이스
+            멀티 디바이스 (예정)
           </button>
         </div>
       </div>

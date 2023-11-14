@@ -10,3 +10,25 @@
     font-family: Pretendard, 'Pretendard', 'Proxima Nova', system-ui, sans-serif;
   }
 }
+
+/* 전체 웹페이지에 적용되는 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 6px; /* 스크롤바의 너비 */
+  height: 4px;
+}
+
+/* 스크롤바 트랙 (바탕) 스타일 */
+::-webkit-scrollbar-track {
+  background: transparent; /* 트랙의 배경색 */
+}
+
+/* 스크롤바 핸들 (움직이는 부분) 스타일 */
+::-webkit-scrollbar-thumb {
+  background: #888; /* 핸들의 배경색 */
+  border-radius: 10px; /* 핸들의 모서리 둥글기 */
+}
+
+/* 스크롤바 핸들에 마우스 호버시 스타일 */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 호버시 핸들의 배경색 */
+}

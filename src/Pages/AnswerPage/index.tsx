@@ -3,7 +3,7 @@ import useApiStore from '@Store/useGameInfoStore';
 import usePlayerStore from '@Store/usePlayerStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DYNAMIC_ROUTE_PATH } from '@Config/constant';
+import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import SelectPlayerComponent from '@Components/SelectPlayer';
 import QuestionAndAnswer from '@Components/QuestionAndAnswer';
@@ -40,7 +40,6 @@ const AnswerPage = () => {
           }
         },
         onError: (error) => {
-          console.log(error);
           if (error.response?.data.message === 'Game is over') {
             navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id || '').END_PAGE);
           }

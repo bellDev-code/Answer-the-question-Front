@@ -1,9 +1,10 @@
 import { BaseButton } from '@Components/atom/button/BaseButton';
-import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Config/constant';
+import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import gameInfoStore from '@Store/useGameInfoStore';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import DonateImageQr from 'src/assets/images/donate-qr.png';
 
 const DonatePage = () => {
   const { gameInfoResult } = gameInfoStore();
@@ -18,13 +19,20 @@ const DonatePage = () => {
 
   return (
     <PlayGameLayout>
-      <div className='flex flex-col p-10'>
-        <h1 className='text-2xl py-10'>
-          잠깐! 다음 라운드를 진행하기 전에 우리 앱을 위해 후원 부탁드려요!
-        </h1>
-        <div>
-          <p>카카오페이</p>
-          <p>qr 시스템</p>
+      <div className='flex flex-col overflow-auto h-full'>
+        <div className='w-full h-auto'>
+          <img className='mb-2 h-auto' src={DonateImageQr} />
+          <div className='text-center m-auto mb-2'>
+            <BaseButton>
+              <a target='_blank' href='https://qr.kakaopay.com/Ej8NoZZ1I' rel='noreferrer'>
+                후원 하기
+              </a>
+            </BaseButton>
+          </div>
+          <div>
+            여러분의 후원은 <strong>취중진담</strong>을 더욱 개선하고 새로운 기능을 추가하는 데 큰
+            힘이 됩니다. 후원으로 이루어지는 변화들을 함께 지켜봐 주세요.
+          </div>
         </div>
         <div className='flex justify-end'>
           <BaseButton onClick={handleKeepClick}>계속하기</BaseButton>

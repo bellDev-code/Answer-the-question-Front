@@ -10,16 +10,16 @@ type SingleInputState = {
   setUsername: (name: string) => void;
 };
 
-const mockObjectList = [
-  { username: '카리나' },
-  { username: '윈터' },
-  { username: '지젤' },
-  { username: '닝닝' },
-];
+// const mockObjectList = [
+//   { username: '카리나' },
+//   { username: '윈터' },
+//   { username: '지젤' },
+//   { username: '닝닝' },
+// ];
 
 const usePlayerStore = create<SingleInputState>((set) => ({
   username: '',
-  players: mockObjectList,
+  players: [],
   selectedName: null,
   setUsername: (name) => set({ username: name }),
   addName: () => {
@@ -27,7 +27,7 @@ const usePlayerStore = create<SingleInputState>((set) => ({
       if (state.username) {
         const updatedNames = [...state.players, { username: state.username }];
 
-        return { players: updatedNames.concat(mockObjectList), username: '' };
+        return { players: updatedNames, username: '' };
       }
       return state;
     });

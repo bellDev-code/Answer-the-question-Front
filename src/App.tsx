@@ -5,7 +5,7 @@ import SingleDevicePage from '@Pages/SinglePage';
 import SelectPlayerTypePage from '@Pages/SelectPlayerTypePage';
 import SelectQApage from '@Pages/SelectQApage';
 import AnswerPage from '@Pages/AnswerPage';
-import { ROUTE_PATH } from './Config/constant';
+import { ROUTE_PATH } from './configure/constant';
 import EndPage from '@Pages/EndPage';
 import DonatePage from '@Pages/DonatePage';
 import ChangePlayerTypePage from '@Pages/ChangePlayerTypePage';
@@ -13,6 +13,7 @@ import MultiDevicePage from '@Pages/MultiPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RootLayout from '@Layouts/RootLayout';
+import MultiRoom from '@Pages/MultiRoom';
 
 const BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID = `${ROUTE_PATH.SINGLE_PAGE}/:gameId`;
 
@@ -52,6 +53,8 @@ const App = () => {
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.DONATE_PAGE}`}
             element={<DonatePage />}
           />
+
+          <Route path='/multiRoomPage' element={<MultiRoom />} />
           <Route path='*' element={<div>404</div>} />
         </Routes>
       </RootLayout>

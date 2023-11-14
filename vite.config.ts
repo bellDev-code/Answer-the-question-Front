@@ -29,7 +29,7 @@ export default defineConfig({
       },
       {
         find: '@Config',
-        replacement: resolve(__dirname, 'src/Config'),
+        replacement: resolve(__dirname, '@Configure'),
       },
     ],
   },

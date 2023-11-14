@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSingleInputStore from '@Store/usePlayerStore';
-import { ROUTE_PATH } from '@Config/constant';
+import { ROUTE_PATH } from '@Configure/constant';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 
 const SinglePage = () => {
@@ -30,11 +30,11 @@ const SinglePage = () => {
     navigate(`${ROUTE_PATH.SINGLE_PAGE}${ROUTE_PATH.ANSWER_SELECT}`);
   };
   return (
-    <div className='px-10 h-screen'>
+    <div className='px-10 h-screen w-full'>
       <div className='flex flex-col py-5 items-center justify-between'>
         <div className='flex w-full justify-between  items-center '>
           <input
-            className='p-2 border-b border-black place-content-center'
+            className='p-2 border-b w-full border-black place-content-center'
             type='text'
             placeholder='이름을 입력해주세요.'
             value={username}
