@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '@Pages/HomePage';
 import SingleDevicePage from '@Pages/SinglePage';
 import SelectPlayerTypePage from '@Pages/SelectPlayerTypePage';
-import SelectQApage from '@Pages/SelectQApage';
+// import SelectQApage from '@Pages/SelectQApage';
 import AnswerPage from '@Pages/AnswerPage';
 import { ROUTE_PATH } from './configure/constant';
 import EndPage from '@Pages/EndPage';
@@ -14,7 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RootLayout from '@Layouts/RootLayout';
 
-const BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID = `${ROUTE_PATH.SINGLE_PAGE}/:gameId`;
+const BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID = `${ROUTE_PATH.SINGLE_PAGE}/:gameId/:questionIndex`;
 
 const App = () => {
   return (
@@ -31,10 +31,10 @@ const App = () => {
             path={`${ROUTE_PATH.SINGLE_PAGE}${ROUTE_PATH.ANSWER_SELECT}`}
             element={<SelectPlayerTypePage />}
           />
-          <Route
+          {/* <Route
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.SELECT_QA_PAGE}`}
             element={<SelectQApage />}
-          />
+          /> */}
           <Route
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.ANSWER_PAGE}`}
             element={<AnswerPage />}
