@@ -66,7 +66,6 @@ const AnswerPage = () => {
     );
   };
 
-  console.log(gameDetail);
   const isRandom = gameDetail?.data?.playerSelectionType === 'random';
 
   if (isLoading) {
