@@ -18,6 +18,7 @@ const Home = () => {
             공유 모드
           </button>
           <p className='text-sm mt-2'>하나의 기기를 여러 사람이 번갈아 사용하는 모드</p>
+          <p className='text-sm '>하나의 핸드폰을 사용합니다.</p>
         </div>
         <div className='flex flex-col items-center'>
           <button
@@ -28,6 +29,7 @@ const Home = () => {
             개인 모드
           </button>
           <p className='text-sm mt-2'>각자의 기기를 사용하여 서비스에 참여하는 모드</p>
+          <p className='text-sm'>각자의 핸드폰을 사용합니다.</p>
         </div>
       </div>
     </div>
