@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { IErrorResponse, IRequestMultiGameData, IResponseBase, IResponseMultiInfo } from './types';
 import { client } from './client';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 const prefix = 'game/multi-game';
 
@@ -30,5 +30,26 @@ export const useCreateRoomQuery = () => {
     IRequestMultiGameData
   >({
     mutationFn: createRoom,
+  });
+};
+
+const getMultiGameIdDetail = async (gameId: string) => {
+  const response: AxiosResponse<
+    IResponseBase<IResponseMultiInfo>,
+    IResponseMultiInfo
+  > = await client.get(`${prefix}/${gameId}`);
+
+  return response.data;
+};
+
+export const useMultiGameIdDerailQuery = (gameId: string) => {
+  return useQuery<
+    IResponseBase<IResponseMultiInfo>,
+    AxiosError<IErrorResponse>,
+    IResponseBase<IResponseMultiInfo>
+  >({
+    queryKey: [],
+    queryFn: () => getMultiGameIdDetail(gameId),
+    enabled: !!gameId,
   });
 };

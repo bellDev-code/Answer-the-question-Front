@@ -10,6 +10,7 @@ export const ROUTE_PATH = Object.freeze({
   RANDOM_QA_PAGE: '/randomAQpage',
   DONATE_PAGE: '/donate',
   MULTI_ROOM: '/multiRoomPage',
+  INVITE_PAGE: '/invite',
 });
 
 export const DYNAMIC_ROUTE_PATH = (gameId: string, questionIndex: number) => ({
@@ -20,4 +21,6 @@ export const DYNAMIC_ROUTE_PATH = (gameId: string, questionIndex: number) => ({
   END_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.END_PAGE}`,
   RANDOM_QA_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.RANDOM_QA_PAGE}`,
   DONATE_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.DONATE_PAGE}`,
-});
+  MULTI_ROOM: `${ROUTE_PATH.MULTI_PAGE}/${gameId}${ROUTE_PATH.MULTI_ROOM}`,
+  INVITE_ROOM: `${ROUTE_PATH.MULTI_PAGE}/${gameId}${ROUTE_PATH.INVITE_PAGE}`,
+})

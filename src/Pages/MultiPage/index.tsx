@@ -2,9 +2,11 @@ import { useCreateRoomQuery } from '@Api/multiGame';
 import { IRequestMultiGameData, TPlaySelectionType } from '@Api/types';
 import BackButtonWithText from '@Components/BackButtonWithText';
 import { BaseButton } from '@Components/atom/button/BaseButton';
+import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import useApiStore from '@Store/useGameInfoStore';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const MultiDevicePage = () => {
@@ -13,6 +15,8 @@ const MultiDevicePage = () => {
 
   const [selectedType, setSelectedType] = useState<TPlaySelectionType | null>(null);
   const [players, setPlayers] = useState<string>('');
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPlayers(event.target.value);
@@ -39,6 +43,7 @@ const MultiDevicePage = () => {
       onSuccess: (data) => {
         if (data.code === 200) {
           setMultiResult(data.data);
+          navigate(`${DYNAMIC_ROUTE_PATH(data.data._id).MULTI_ROOM}`);
         } else {
           console.log(data);
         }

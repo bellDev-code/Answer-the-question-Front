@@ -22,7 +22,6 @@ const Home = () => {
         </div>
         <div className='flex flex-col items-center'>
           <button
-            disabled
             onClick={() => navigate(ROUTE_PATH.MULTI_PAGE)}
             className='bg-black text-white px-10 w-9/12 py-3 text-l rounded-xl'
           >
