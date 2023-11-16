@@ -6,7 +6,7 @@ import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import useApiStore from '@Store/useGameInfoStore';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const MultiDevicePage = () => {
@@ -15,6 +15,7 @@ const MultiDevicePage = () => {
 
   const [selectedType, setSelectedType] = useState<TPlaySelectionType | null>(null);
   const [players, setPlayers] = useState<string>('');
+  const { questionIndex } = useParams();
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const MultiDevicePage = () => {
       onSuccess: (data) => {
         if (data.code === 200) {
           setMultiResult(data.data);
-          navigate(`${DYNAMIC_ROUTE_PATH(data.data._id).MULTI_ROOM}`);
+          navigate(`${DYNAMIC_ROUTE_PATH(data.data._id, Number(questionIndex)).MULTI_ROOM}`);
         } else {
           console.log(data);
         }

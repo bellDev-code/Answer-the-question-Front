@@ -4,14 +4,18 @@ import useApiStore from '@Store/useGameInfoStore';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 const MultiRoom = () => {
   const { multiInfoResult } = useApiStore();
+  const { questionIndex } = useParams();
 
   const roomOwner = multiInfoResult?.players[0].username;
 
   // 임시 공유 url
-  const inviteUrl = `localhost:5173${DYNAMIC_ROUTE_PATH(multiInfoResult?._id || '').INVITE_ROOM}`;
+  const inviteUrl = `localhost:5173${
+    DYNAMIC_ROUTE_PATH(multiInfoResult?._id || '', Number(questionIndex)).INVITE_ROOM
+  }`;
 
   const clipBoardCopy = (text: string) => {
     try {
@@ -27,6 +31,14 @@ const MultiRoom = () => {
       <div>
         <div>총 참여인원 : {multiInfoResult?.players.length}</div>
         <div>{roomOwner}</div>
+        <div>
+          {multiInfoResult?.players.map((player, index) => {
+            if (index !== 0) {
+              return <div key={index}>{player.username}</div>;
+            }
+            return null;
+          })}
+        </div>
       </div>
       <div className='sm: flex py-10'>시작하기 버튼을 누르면 추가 인원 참여가 불가능합니다.</div>
       <div className='sm: flex flex-wrap text-sm py-5'>
