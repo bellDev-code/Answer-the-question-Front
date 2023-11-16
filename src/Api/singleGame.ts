@@ -11,6 +11,7 @@ import {
 import { AxiosError, AxiosResponse } from 'axios';
 
 export const QUESTION_LIST_QUERY_KEY = 'questionList';
+
 const prefix = '/game/single-game';
 
 // 게임 시작 API 호출 함수
@@ -70,24 +71,24 @@ export const useQuestionListMutation = () => {
   });
 };
 
-const getGameIdDetail = async (gameId: string) => {
+const getGameIdDetail = async (gameId: string, questionIndex: number) => {
   const response: AxiosResponse<
     IResponseBase<IResponseGameInfo>,
     IResponseGameInfo
-  > = await client.get(`${prefix}/${gameId}`);
+  > = await client.get(`${prefix}/${gameId}/${questionIndex}`);
 
   return response.data;
 };
 
-export const useGameIdDetailQuery = (gameId: string) => {
+export const useGameIdDetailQuery = (gameId: string, questionNumber: number) => {
   return useQuery<
     IResponseBase<IResponseGameInfo>,
     AxiosError<IErrorResponse>,
     IResponseBase<IResponseGameInfo>
   >({
-    queryKey: [QUESTION_LIST_QUERY_KEY, gameId],
-    queryFn: () => getGameIdDetail(gameId),
-    enabled: !!gameId,
+    queryKey: [QUESTION_LIST_QUERY_KEY, gameId, questionNumber],
+    queryFn: () => getGameIdDetail(gameId, questionNumber),
+    enabled: !!gameId && questionNumber !== undefined,
   });
 };
 

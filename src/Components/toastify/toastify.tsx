@@ -3,8 +3,8 @@ import { toast as toastFunction } from 'react-toastify';
 export const toast = (text: string) => {
   return toastFunction(text, {
     position: 'top-right',
-    autoClose: 2000,
-    hideProgressBar: false,
+    autoClose: 1500,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,

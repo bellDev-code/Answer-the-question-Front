@@ -49,11 +49,11 @@ const AnswerSelectPage = () => {
           if (data.code === 200) {
             setApiResult(data.data);
             // 시작을 할 때는 인원을 선택하지 않고 처음 작성된 사람이 질문에 답을 한다. 따라서 선택된 이름은 서버에서 오는 첫번째로 작성된 유저이다.
+            // 0번째 질문을 한다.
             setSelectedName(data.data.selectedPlayer.username);
-            navigate(DYNAMIC_ROUTE_PATH(data.data._id).SELECT_QA_PAGE);
-          } else {
-            // 통신은 성공했으나, 서버에서 에러를 보내준 경우
-            console.log(data);
+            navigate(DYNAMIC_ROUTE_PATH(data.data._id, 0).ANSWER_PAGE);
+          } else if (data.code === 400 && data.message === 'At least two players are required') {
+            toast('최소 두명 이상의 플레이어가 필요합니다.');
           }
         },
         onError: (error) => {

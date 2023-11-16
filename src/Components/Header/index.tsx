@@ -1,6 +1,6 @@
-import KakaoShare from '@Components/KakaoShared';
 import RuleModal from '@Components/modal/RuleModal';
 import React, { useState } from 'react';
+import ShareMenu from './ShareMenu';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,8 @@ const Header = () => {
       </button>
 
       <RuleModal open={open} handleClose={handleClose} />
-      <KakaoShare />
+
+      <ShareMenu />
     </div>
   );
 };

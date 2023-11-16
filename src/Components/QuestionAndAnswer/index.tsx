@@ -1,3 +1,4 @@
+import TypewriterComponent from '@Components/TypewriterComponent';
 import React from 'react';
 
 interface IProps {
@@ -9,7 +10,7 @@ interface IProps {
 const QuestionAndAnswer = ({ question, answer, className }: IProps) => {
   return (
     <div className={`${className} mb-6`}>
-      <div className='text-xl mb-4'>{question}</div>
+      <div className='text-xl mb-4'>{question && <TypewriterComponent text={question} />}</div>
       <div>답변자: {answer}</div>
     </div>
   );
