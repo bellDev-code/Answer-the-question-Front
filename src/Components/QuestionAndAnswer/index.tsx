@@ -9,9 +9,16 @@ interface IProps {
 
 const QuestionAndAnswer = ({ question, answer, className }: IProps) => {
   return (
-    <div className={`${className} mb-6`}>
-      <div className='text-xl mb-4'>{question && <TypewriterComponent text={question} />}</div>
-      <div>답변자: {answer}</div>
+    <div className={`${className} w-full text-center mb-6`}>
+      <h2 className='text-h2 text-xl mb-6'>{answer} 님!</h2>
+
+      <div className='text-2xl mb-4 w-full'>
+        {question && (
+          <>
+            <TypewriterComponent text={question} />
+          </>
+        )}
+      </div>
     </div>
   );
 };
