@@ -12,10 +12,14 @@ export interface IRequestGameStartData {
   category: TGameCategory;
 }
 
-export interface IRequestMultiGameData {
+export interface IRequestMultiCreateData {
   playerSelectionType: TPlaySelectionType;
   category: TGameCategory;
   players: IPlayer[];
+}
+
+export interface IRequestMultiGameData {
+  gameId: string;
 }
 
 export const QuestionCategoryObject = Object.freeze({
@@ -35,6 +39,8 @@ export interface IQuestion {
 
 export interface IResponseMultiInfo {
   _id: string;
+  selectedQuestion: IQuestion;
+  selectedPlayer: IPlayer;
   isOver: boolean;
   currentRound: number;
   gameType: TGameType;

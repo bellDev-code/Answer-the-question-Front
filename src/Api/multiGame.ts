@@ -1,8 +1,13 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { IErrorResponse, IRequestMultiGameData, IResponseBase, IResponseMultiInfo } from './types';
+import {
+  IErrorResponse,
+  IRequestMultiCreateData,
+  IRequestMultiGameData,
+  IResponseBase,
+  IResponseMultiInfo,
+} from './types';
 import { client } from './client';
 import { useMutation, useQuery } from '@tanstack/react-query';
-// import { QUESTION_LIST_QUERY_KEY } from './singleGame';
 
 const prefix = 'game/multi-game';
 export const MULTI_GAME_LIST_QUERY_KEY = 'multiGameList';
@@ -12,10 +17,10 @@ const createRoom = async ({
   players,
   playerSelectionType,
   category,
-}: IRequestMultiGameData): Promise<IResponseBase<IResponseMultiInfo>> => {
+}: IRequestMultiCreateData): Promise<IResponseBase<IResponseMultiInfo>> => {
   const response: AxiosResponse<
     IResponseBase<IResponseMultiInfo>,
-    IRequestMultiGameData
+    IRequestMultiCreateData
   > = await client.post(`${prefix}/create`, {
     players,
     playerSelectionType,
@@ -29,7 +34,7 @@ export const useCreateRoomQuery = () => {
   return useMutation<
     IResponseBase<IResponseMultiInfo>,
     AxiosError<IErrorResponse>,
-    IRequestMultiGameData
+    IRequestMultiCreateData
   >({
     mutationFn: createRoom,
   });
@@ -84,4 +89,28 @@ export const useJoinRoomQuery = () => {
       mutationFn: joinRoom,
     },
   );
+};
+
+// 멀티 게임 시작
+const startMultiGame = async ({
+  gameId,
+}: IRequestMultiGameData): Promise<IResponseBase<IResponseMultiInfo>> => {
+  const response: AxiosResponse<
+    IResponseBase<IResponseMultiInfo>,
+    IRequestMultiGameData
+  > = await client.post(`${prefix}/start`, {
+    gameId,
+  });
+
+  return response.data;
+};
+
+export const useStartMultiGameQuery = () => {
+  return useMutation<
+    IResponseBase<IResponseMultiInfo>,
+    AxiosError<IErrorResponse>,
+    IRequestMultiGameData
+  >({
+    mutationFn: startMultiGame,
+  });
 };
