@@ -9,11 +9,12 @@ import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import { toast } from '@Components/toastify/toastify';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
+import StartGameLoading from '@Components/Skeleton/StartGameLoading';
 
 const AnswerSelectPage = () => {
   const navigate = useNavigate();
   const { players, setSelectedName } = useSingleInputStore();
-  const { mutate: startGameMutate } = useStartGameQuery();
+  const { mutate: startGameMutate, isPending } = useStartGameQuery();
   const { setApiResult } = useApiStore();
 
   const { selectedRoute, setSelectedRoute } = useAnswerSelectStore();
@@ -67,6 +68,10 @@ const AnswerSelectPage = () => {
       });
     }
   };
+
+  if (isPending) {
+    return <StartGameLoading />;
+  }
 
   return (
     <PlayGameLayout>

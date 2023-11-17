@@ -1,21 +1,19 @@
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
-import gameInfoStore from '@Store/useGameInfoStore';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DonateImageQr from 'src/assets/images/donate-qr.png';
 
 const DonatePage = () => {
-  const { gameInfoResult } = gameInfoStore();
-  const { questionIndex } = useParams();
+  const { gameId, questionIndex } = useParams();
 
   const navigate = useNavigate();
 
   const handleKeepClick = () => {
-    if (!gameInfoResult?._id) return navigate(ROUTE_PATH.HOME);
+    if (!gameId) return navigate(ROUTE_PATH.HOME);
 
-    navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id, Number(questionIndex)).ANSWER_PAGE);
+    navigate(DYNAMIC_ROUTE_PATH(gameId || '', Number(questionIndex)).ANSWER_PAGE);
   };
 
   return (
