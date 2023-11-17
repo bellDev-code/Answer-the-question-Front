@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RootLayout from '@Layouts/RootLayout';
 import MultiRoom from '@Pages/MultiRoom';
+import MultiWatingPage from '@Pages/MultiWatingPage';
 
 const BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID = `${ROUTE_PATH.SINGLE_PAGE}/:gameId/:questionIndex`;
 const BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID = `${ROUTE_PATH.MULTI_PAGE}/:gameId/:questionIndex`;
@@ -42,6 +43,10 @@ const App = () => {
             element={<AnswerPage />}
           />
           <Route
+            path={`${BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID}${ROUTE_PATH.ANSWER_PAGE}`}
+            element={<AnswerPage />}
+          />
+          <Route
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.BM_PAGE}`}
             element={<ChangePlayerTypePage />}
           />
@@ -55,6 +60,11 @@ const App = () => {
           <Route
             path={`${BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID}${ROUTE_PATH.MULTI_ROOM}`}
             element={<MultiRoom />}
+          />
+
+          <Route
+            path={`${BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID}${ROUTE_PATH.WATING_PAGE}`}
+            element={<MultiWatingPage />}
           />
 
           <Route path='*' element={<div>404</div>} />
