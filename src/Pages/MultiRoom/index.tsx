@@ -1,11 +1,13 @@
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import React, { useEffect, useState } from 'react';
 import { BaseButton } from '@Components/atom/button/BaseButton';
-import { SESSION_USERNAME } from '@Configure/constant';
+import { DYNAMIC_ROUTE_PATH, SESSION_USERNAME } from '@Configure/constant';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
-import { useMultiGameIdDetailQuery } from '@Api/multiGame';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useMultiGameIdDetailQuery, useStartMultiGameQuery } from '@Api/multiGame';
 import UsernameModal from './component/UsernameModal';
+import { IRequestMultiGameData } from '@Api/types';
+import gameInfoStore from '@Store/useGameInfoStore';
 
 const MultiRoom = () => {
   const { gameId, questionIndex } = useParams();
@@ -14,6 +16,10 @@ const MultiRoom = () => {
     gameId || '',
     Number(questionIndex) || 0,
   );
+
+  const navigate = useNavigate();
+  const { mutate: multiStartMutate } = useStartMultiGameQuery();
+  const { setMultiResult } = gameInfoStore();
 
   const roomOwner = multiGameResult?.data?.players[0].username;
 
@@ -40,6 +46,28 @@ const MultiRoom = () => {
   const currentUserName = sessionStorage.getItem(SESSION_USERNAME);
   const isShowStartButton = roomOwner === currentUserName;
 
+  const startMultiGame = () => {
+    const gameStartData: IRequestMultiGameData = {
+      gameId: gameId || '',
+    };
+
+    multiStartMutate(gameStartData, {
+      onSuccess: (data) => {
+        if (data.code === 200) {
+          setMultiResult(data.data);
+          navigate(`${DYNAMIC_ROUTE_PATH(gameId || '', 0).MULTI_ANSWER_PAGE}`);
+        }
+      },
+      onError: (error) => {
+        switch (error.code) {
+          case 'ERR_NETWORK':
+            toast('네트워크 에러');
+            break;
+        }
+      },
+    });
+  };
+
   return (
     <PlayGameLayout>
       <UsernameModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
@@ -60,7 +88,7 @@ const MultiRoom = () => {
         <div className='sm: w-full break-words'>{inviteUrl}</div>
         <BaseButton onClick={() => clipBoardCopy(inviteUrl)}>복사하기</BaseButton>
       </div>
-      <div>{isShowStartButton && <BaseButton>시작하기</BaseButton>}</div>
+      <div>{isShowStartButton && <BaseButton onClick={startMultiGame}>시작하기</BaseButton>}</div>
     </PlayGameLayout>
   );
 };

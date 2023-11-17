@@ -1,5 +1,5 @@
 import { useCreateRoomQuery } from '@Api/multiGame';
-import { IRequestMultiGameData, TPlaySelectionType } from '@Api/types';
+import { IRequestMultiCreateData, TPlaySelectionType } from '@Api/types';
 import BackButtonWithText from '@Components/BackButtonWithText';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import { DYNAMIC_ROUTE_PATH, SESSION_USERNAME } from '@Configure/constant';
@@ -30,7 +30,7 @@ const MultiDevicePage = () => {
       return;
     }
 
-    const createRoomData: IRequestMultiGameData = {
+    const createRoomData: IRequestMultiCreateData = {
       players: [{ username: players }],
       playerSelectionType: selectedType,
       category: 'serious',
