@@ -1,23 +1,21 @@
 import React from 'react';
 import usePlayerStore from '@Store/usePlayerStore';
-import gameInfoStore from '@Store/useGameInfoStore';
 import CheckIcon from '@mui/icons-material/Check'; // Check 아이콘 가져오기
 
 interface IProps {
   className?: string;
+  answer?: string;
+  players: { username: string }[];
 }
 
-const SelectPlayerComponent = ({ className }: IProps) => {
+const SelectPlayerComponent = ({ className, players, answer }: IProps) => {
   const { setSelectedName, selectedName } = usePlayerStore();
-  const { gameInfoResult } = gameInfoStore();
 
   const handleNameClick = (name: string) => {
     setSelectedName(name);
   };
 
-  const showPlayer = gameInfoResult?.players.filter(
-    (player) => player.username !== gameInfoResult?.selectedPlayer.username,
-  );
+  const showPlayer = players.filter((player) => player.username !== answer);
 
   return (
     <div className={`w-full max-h-96 overflow-auto ${className}`}>

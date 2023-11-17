@@ -1,21 +1,32 @@
 import PlayGameLayout from '@Layouts/PlayGameLayout';
-import React from 'react';
-import useApiStore from '@Store/useGameInfoStore';
+import React, { useEffect, useState } from 'react';
 import { BaseButton } from '@Components/atom/button/BaseButton';
-import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
+import { SESSION_USERNAME } from '@Configure/constant';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import { useMultiGameIdDetailQuery } from '@Api/multiGame';
+import UsernameModal from './component/UsernameModal';
 
 const MultiRoom = () => {
-  const { multiInfoResult } = useApiStore();
-  const { questionIndex } = useParams();
+  const { gameId, questionIndex } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: multiGameResult } = useMultiGameIdDetailQuery(
+    gameId || '',
+    Number(questionIndex) || 0,
+  );
 
-  const roomOwner = multiInfoResult?.players[0].username;
+  const roomOwner = multiGameResult?.data?.players[0].username;
 
   // 임시 공유 url
-  const inviteUrl = `localhost:5173${
-    DYNAMIC_ROUTE_PATH(multiInfoResult?._id || '', Number(questionIndex)).INVITE_ROOM
-  }`;
+  const inviteUrl = window.location.href;
+
+  useEffect(() => {
+    const currentUserName = sessionStorage.getItem(SESSION_USERNAME);
+    if (!currentUserName) {
+      // 사용자 이름이 sessionStorage에 없으면 모달을 엽니다.
+      setIsModalOpen(true);
+    }
+  }, []);
 
   const clipBoardCopy = (text: string) => {
     try {
@@ -26,13 +37,17 @@ const MultiRoom = () => {
     }
   };
 
+  const currentUserName = sessionStorage.getItem(SESSION_USERNAME);
+  const isShowStartButton = roomOwner === currentUserName;
+
   return (
     <PlayGameLayout>
+      <UsernameModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <div>
-        <div>총 참여인원 : {multiInfoResult?.players.length}</div>
+        <div>총 참여인원 : {multiGameResult?.data?.players.length}</div>
         <div>{roomOwner}</div>
         <div>
-          {multiInfoResult?.players.map((player, index) => {
+          {multiGameResult?.data?.players.map((player, index) => {
             if (index !== 0) {
               return <div key={index}>{player.username}</div>;
             }
@@ -41,13 +56,11 @@ const MultiRoom = () => {
         </div>
       </div>
       <div className='sm: flex py-10'>시작하기 버튼을 누르면 추가 인원 참여가 불가능합니다.</div>
-      <div className='sm: flex flex-wrap text-sm py-5'>
-        <div className='sm:'>{inviteUrl}</div>
+      <div className='sm: flex flex-wrap text-sm py-5 w-full'>
+        <div className='sm: w-full break-words'>{inviteUrl}</div>
         <BaseButton onClick={() => clipBoardCopy(inviteUrl)}>복사하기</BaseButton>
       </div>
-      <div>
-        <BaseButton>시작하기</BaseButton>
-      </div>
+      <div>{isShowStartButton && <BaseButton>시작하기</BaseButton>}</div>
     </PlayGameLayout>
   );
 };

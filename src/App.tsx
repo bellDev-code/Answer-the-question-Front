@@ -14,10 +14,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RootLayout from '@Layouts/RootLayout';
 import MultiRoom from '@Pages/MultiRoom';
-import InvitePage from '@Pages/InvitePage';
 
 const BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID = `${ROUTE_PATH.SINGLE_PAGE}/:gameId/:questionIndex`;
-const BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID = `${ROUTE_PATH.MULTI_PAGE}/:gameId`;
+const BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID = `${ROUTE_PATH.MULTI_PAGE}/:gameId/:questionIndex`;
 
 const App = () => {
   return (
@@ -61,10 +60,6 @@ const App = () => {
             element={<MultiRoom />}
           />
 
-          <Route
-            path={`${BASE_ROUTE_MULTI_PAGE_WITH_GAME_ID}${ROUTE_PATH.INVITE_PAGE}`}
-            element={<InvitePage />}
-          />
           <Route path='*' element={<div>404</div>} />
         </Routes>
       </RootLayout>

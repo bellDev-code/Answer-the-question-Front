@@ -10,13 +10,6 @@ type SingleInputState = {
   setUsername: (name: string) => void;
 };
 
-// const mockObjectList = [
-//   { username: '카리나' },
-//   { username: '윈터' },
-//   { username: '지젤' },
-//   { username: '닝닝' },
-// ];
-
 const usePlayerStore = create<SingleInputState>((set) => ({
   username: '',
   players: [],

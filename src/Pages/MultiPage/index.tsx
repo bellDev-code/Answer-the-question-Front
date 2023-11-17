@@ -2,20 +2,16 @@ import { useCreateRoomQuery } from '@Api/multiGame';
 import { IRequestMultiGameData, TPlaySelectionType } from '@Api/types';
 import BackButtonWithText from '@Components/BackButtonWithText';
 import { BaseButton } from '@Components/atom/button/BaseButton';
-import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
+import { DYNAMIC_ROUTE_PATH, SESSION_USERNAME } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
-import useApiStore from '@Store/useGameInfoStore';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const MultiDevicePage = () => {
   const { mutate: createRoomMutate } = useCreateRoomQuery();
-  const { setMultiResult } = useApiStore();
-
   const [selectedType, setSelectedType] = useState<TPlaySelectionType | null>(null);
   const [players, setPlayers] = useState<string>('');
-  const { questionIndex } = useParams();
 
   const navigate = useNavigate();
 
@@ -43,10 +39,8 @@ const MultiDevicePage = () => {
     createRoomMutate(createRoomData, {
       onSuccess: (data) => {
         if (data.code === 200) {
-          setMultiResult(data.data);
-          navigate(`${DYNAMIC_ROUTE_PATH(data.data._id, Number(questionIndex)).MULTI_ROOM}`);
-        } else {
-          console.log(data);
+          sessionStorage.setItem(SESSION_USERNAME, players);
+          navigate(`${DYNAMIC_ROUTE_PATH(data.data._id, 0).MULTI_ROOM}`);
         }
       },
       onError: (error) => {

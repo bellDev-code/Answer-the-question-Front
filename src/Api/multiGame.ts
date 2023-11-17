@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 // import { QUESTION_LIST_QUERY_KEY } from './singleGame';
 
 const prefix = 'game/multi-game';
+export const MULTI_GAME_LIST_QUERY_KEY = 'multiGameList';
 
 // 방 생성
 const createRoom = async ({
@@ -49,9 +50,11 @@ export const useMultiGameIdDetailQuery = (gameId: string, questionNumber: number
     AxiosError<IErrorResponse>,
     IResponseBase<IResponseMultiInfo>
   >({
-    queryKey: [],
+    queryKey: [MULTI_GAME_LIST_QUERY_KEY, gameId, questionNumber],
     queryFn: () => getMultiGameIdDetail(gameId, questionNumber),
     enabled: !!gameId && questionNumber !== undefined,
+    refetchInterval: 1000,
+    refetchIntervalInBackground: true,
   });
 };
 
@@ -75,7 +78,7 @@ const joinRoom = async ({
   return response.data;
 };
 
-export const joinRoomQuery = () => {
+export const useJoinRoomQuery = () => {
   return useMutation<IResponseBase<IResponseMultiInfo>, AxiosError<IErrorResponse>, joinRoomParams>(
     {
       mutationFn: joinRoom,

@@ -14,7 +14,8 @@ import QuestionAndAnswer from '@Components/QuestionAndAnswer';
 import GuideTextComponent from '@Components/GuideText';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import { useQueryClient } from '@tanstack/react-query';
-import { Skeleton } from '@mui/material';
+import { useDelayedVisibility } from 'src/hooks/useDelayedVisibility';
+import PageSkeleton from '@Components/Skeleton/PageSkeleton';
 
 const AnswerPage = () => {
   const queryClient = useQueryClient();
@@ -30,6 +31,8 @@ const AnswerPage = () => {
 
   const { mutate: nextQuestionMutate } = useQuestionListMutation();
 
+  const [isShowButton, resetDelay] = useDelayedVisibility(1000);
+
   const handlePass = () => {
     nextQuestionMutate(
       {
@@ -44,6 +47,9 @@ const AnswerPage = () => {
             queryClient.invalidateQueries({
               queryKey: [QUESTION_LIST_QUERY_KEY],
             });
+            if (typeof resetDelay === 'function') {
+              resetDelay(); // resetDelay가 함수일 때만 호출합니다.
+            }
             if (gameInfoResult?.currentRound !== data.data.currentRound) {
               navigate(DYNAMIC_ROUTE_PATH(data.data?._id || '', Number(questionIndex) + 1).BM_PAGE);
               setApiResult(data.data);
@@ -69,11 +75,7 @@ const AnswerPage = () => {
   const isRandom = gameDetail?.data?.playerSelectionType === 'random';
 
   if (isLoading) {
-    return (
-      <div className='absolute h-screen top-0 right-0 bottom-0 left-0 z-50'>
-        <Skeleton style={{ height: '100%' }} variant='rectangular' />
-      </div>
-    );
+    return <PageSkeleton />;
   }
 
   return (
@@ -84,7 +86,17 @@ const AnswerPage = () => {
           answer={gameDetail?.data?.selectedPlayer.username || ''}
         />
 
-        {!isRandom && <SelectPlayerComponent className='mb-6' />}
+        {!isRandom && (
+          <SelectPlayerComponent
+            answer={gameDetail?.data.selectedPlayer.username || ''}
+            players={
+              gameDetail?.data?.players.map((player) => ({
+                username: player.username,
+              })) || []
+            }
+            className='mb-6'
+          />
+        )}
 
         <GuideTextComponent>
           <div>질문에 답변을 한 후, 다음 단계로 넘어갑니다:</div>
@@ -100,9 +112,11 @@ const AnswerPage = () => {
         </GuideTextComponent>
       </div>
       <div className='flex justify-end px-10 py-10'>
-        <BaseButton disabled={isRandom ? false : selectedName === ''} onClick={handlePass}>
-          다음 질문
-        </BaseButton>
+        {isShowButton && (
+          <BaseButton disabled={isRandom ? false : selectedName === ''} onClick={handlePass}>
+            다음 질문
+          </BaseButton>
+        )}
       </div>
     </PlayGameLayout>
   );
