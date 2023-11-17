@@ -1,4 +1,5 @@
 import { useUpdatePlayerSelectionTypeMutation } from '@Api/singleGame';
+import { BaseButton } from '@Components/atom/button/BaseButton';
 import { toast } from '@Components/toastify/toastify';
 import { DYNAMIC_ROUTE_PATH, ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
@@ -43,31 +44,31 @@ const ChangePlayerTypePage = () => {
 
   return (
     <PlayGameLayout>
-      <div className='sm: flex flex-col p-10 items-center justify-center'>
+      <div className='sm: flex flex-col  items-center justify-center'>
         <h1 className='sm: text-2xl py-10'>모두가 답을 했어요!</h1>
-        <div>
-          <p>질문 대상자 선정 방식을 변경 하시거나 다음 라운드를 진행할 수 있어요</p>
+        <div className='text-center break-keep'>
+          <p>질문 대상자 선정 방식을 변경 할 수 있어요.</p>
           <p>
-            현재는
+            현재는{' '}
             <strong>
               {convertPlayerSelectionType(gameInfoResult?.playerSelectionType || 'direct')}
             </strong>
-            선택했어요
+            이에요.
           </p>
         </div>
         <div className='sm: flex py-10 gap-4'>
-          <button
+          <BaseButton
             onClick={() => selectPlayerType('change')}
-            className='sm: bg-black text-white w-24 p-1 rounded-xl'
+            className='bg-black text-white w-24 p-4'
           >
-            선정 방식을 변경할래요
-          </button>
-          <button
+            변경하기
+          </BaseButton>
+          <BaseButton
             onClick={() => selectPlayerType('noChange')}
-            className='sm: bg-black text-white w-24 p-1 rounded-xl'
+            className='bg-black text-white w-24 p-4'
           >
-            선정 방식을 유지할래요
-          </button>
+            유지하기
+          </BaseButton>
         </div>
       </div>
     </PlayGameLayout>

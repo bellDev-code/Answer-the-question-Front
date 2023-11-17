@@ -20,17 +20,22 @@ const DonatePage = () => {
     <PlayGameLayout>
       <div className='flex flex-col overflow-auto h-full'>
         <div className='w-full h-auto'>
-          <img className='mb-2 h-auto' src={DonateImageQr} />
+          <div className='text-center m-auto mb-4'>
+            <a target='_blank' href='https://qr.kakaopay.com/Ej8NoZZ1I' rel='noreferrer'>
+              <img className='mb-2 h-auto' src={DonateImageQr} />
+            </a>
+          </div>
+
           <div className='text-center m-auto mb-2'>
-            <BaseButton>
+            <BaseButton className='mb-10'>
               <a target='_blank' href='https://qr.kakaopay.com/Ej8NoZZ1I' rel='noreferrer'>
                 후원 하기
               </a>
             </BaseButton>
           </div>
-          <div>
-            여러분의 후원은 <strong>취중진담</strong>을 더욱 개선하고 새로운 기능을 추가하는 데 큰
-            힘이 됩니다. 후원으로 이루어지는 변화들을 함께 지켜봐 주세요.
+          <div className='mb-8'>
+            여러분의 후원은 <strong>Secret Out (시크릿아웃)</strong>을 더욱 개선하고 새로운 기능을
+            추가하는 데 큰 힘이 됩니다. 후원으로 이루어지는 변화들을 함께 지켜봐 주세요.
           </div>
         </div>
         <div className='flex justify-end'>

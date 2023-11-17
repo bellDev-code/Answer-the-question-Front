@@ -12,7 +12,7 @@ export default function KakaoShare() {
       shared.Share.sendDefault({
         objectType: 'feed',
         content: {
-          title: '취중진담',
+          title: '시크릿아웃',
           description: '질문이 이어지는 곳, 우리의 대화가 깊어지는 순간',
           imageUrl: 'https://i.imgur.com/Jwy8VuC.png',
           link: {

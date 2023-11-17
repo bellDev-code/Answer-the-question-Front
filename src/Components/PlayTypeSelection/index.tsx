@@ -1,4 +1,5 @@
 import { TPlaySelectionType } from '@Api/types';
+import { BaseButton } from '@Components/atom/button/BaseButton';
 import React from 'react';
 
 interface IProps {
@@ -18,22 +19,22 @@ const index = ({ selectedPlayType, setSelectedPlayType }: IProps) => {
 
   return (
     <div className='flex break-keep flex-row space-x-2 relative'>
-      <button
+      <BaseButton
         onClick={() => handleClickType('direct')}
-        className={`break-words text-balck transition-transform duration-300 p-4 rounded-xl 
+        className={`break-words text-balck transition-transform duration-300 p-4 rounded-md 
           focus:outline-none 
           ${selectedPlayType === 'direct' ? selectedStyle : unselectedStyle}`}
       >
-        답변자를 직접 고를게요.
-      </button>
-      <button
+        직접 선택할게요
+      </BaseButton>
+      <BaseButton
         onClick={() => handleClickType('random')}
-        className={` break-keep transition-transform duration-300 p-4 rounded-xl 
+        className={` break-keep transition-transform duration-300 p-4 rounded-md 
           focus:outline-none 
           ${selectedPlayType === 'random' ? selectedStyle : unselectedStyle}`}
       >
-        답변자를 랜덤으로 고를게요.
-      </button>
+        랜덤 선택할게요
+      </BaseButton>
     </div>
   );
 };

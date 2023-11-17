@@ -11,10 +11,12 @@ import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import SelectPlayerComponent from '@Components/SelectPlayer';
 import QuestionAndAnswer from '@Components/QuestionAndAnswer';
+
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDelayedVisibility } from 'src/hooks/useDelayedVisibility';
 import PageSkeleton from '@Components/Skeleton/PageSkeleton';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const AnswerPage = () => {
   const queryClient = useQueryClient();
@@ -26,7 +28,7 @@ const AnswerPage = () => {
   );
   const { gameInfoResult, setApiResult } = useApiStore();
 
-  const { selectedName } = usePlayerStore();
+  const { selectedName, setSelectedName } = usePlayerStore();
 
   const { mutate: nextQuestionMutate } = useQuestionListMutation();
 
@@ -67,12 +69,17 @@ const AnswerPage = () => {
             navigate(DYNAMIC_ROUTE_PATH(gameInfoResult?._id || '', Number(questionIndex)).END_PAGE);
           }
         },
+        onSettled: () => {
+          setSelectedName(null);
+        },
       },
     );
   };
 
   const isRandom = gameDetail?.data?.playerSelectionType === 'random';
+  console.log(isRandom);
 
+  console.log('selectedName', selectedName);
   if (isLoading) {
     return <PageSkeleton />;
   }
@@ -97,10 +104,15 @@ const AnswerPage = () => {
           />
         )}
       </div>
-      <div className='flex justify-end px-10 py-10'>
+      <div className='flex justify-end py-10'>
         {isShowButton && (
-          <BaseButton disabled={isRandom ? false : selectedName === ''} onClick={handlePass}>
-            다음 질문
+          <BaseButton
+            disabled={isRandom ? false : selectedName === null}
+            onClick={handlePass}
+            className='flex items-center justify-center p-2 pr-1'
+          >
+            <div>다음 질문</div>
+            <ArrowForwardIosIcon style={{ width: '14px' }} className='w-4' />
           </BaseButton>
         )}
       </div>
