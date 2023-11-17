@@ -7,7 +7,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useMultiGameIdDetailQuery, useStartMultiGameQuery } from '@Api/multiGame';
 import UsernameModal from './component/UsernameModal';
 import { IRequestMultiGameData } from '@Api/types';
-import gameInfoStore from '@Store/useGameInfoStore';
 
 const MultiRoom = () => {
   const { gameId, questionIndex } = useParams();
@@ -19,7 +18,6 @@ const MultiRoom = () => {
 
   const navigate = useNavigate();
   const { mutate: multiStartMutate } = useStartMultiGameQuery();
-  const { setMultiResult } = gameInfoStore();
 
   const roomOwner = multiGameResult?.data?.players[0].username;
 
@@ -34,6 +32,12 @@ const MultiRoom = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (multiGameResult?.data.isPlaying === true) {
+      navigate(`${DYNAMIC_ROUTE_PATH(gameId || '', 0).MULTI_ANSWER_PAGE}`);
+    }
+  });
+
   const clipBoardCopy = (text: string) => {
     try {
       navigator.clipboard.writeText(text);
@@ -44,9 +48,14 @@ const MultiRoom = () => {
   };
 
   const currentUserName = sessionStorage.getItem(SESSION_USERNAME);
+
   const isShowStartButton = roomOwner === currentUserName;
 
   const startMultiGame = () => {
+    if (multiGameResult && multiGameResult?.data?.players.length < 2) {
+      toast('최소 두명 이상의 플레이어가 필요합니다.');
+      return;
+    }
     const gameStartData: IRequestMultiGameData = {
       gameId: gameId || '',
     };
@@ -54,7 +63,6 @@ const MultiRoom = () => {
     multiStartMutate(gameStartData, {
       onSuccess: (data) => {
         if (data.code === 200) {
-          setMultiResult(data.data);
           navigate(`${DYNAMIC_ROUTE_PATH(gameId || '', 0).MULTI_ANSWER_PAGE}`);
         }
       },
@@ -68,27 +76,40 @@ const MultiRoom = () => {
     });
   };
 
+  const viewPlayersWithoutOwner = () => {
+    return (
+      <>
+        {multiGameResult?.data?.players
+          .filter((player) => player.username !== roomOwner)
+          .map((player, index) => {
+            return (
+              <div key={index}>
+                {index + 1}. {player.username}
+              </div>
+            );
+          })}
+      </>
+    );
+  };
+
   return (
     <PlayGameLayout>
       <UsernameModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
-      <div>
-        <div>총 참여인원 : {multiGameResult?.data?.players.length}</div>
-        <div>{roomOwner}</div>
-        <div>
-          {multiGameResult?.data?.players.map((player, index) => {
-            if (index !== 0) {
-              return <div key={index}>{player.username}</div>;
-            }
-            return null;
-          })}
+      <div className='text-center'>
+        <div className='mb-4 text-2xl'>총 참여인원 : {multiGameResult?.data?.players.length}</div>
+        <div>방장: {roomOwner}</div>
+        <div>{viewPlayersWithoutOwner()}</div>
+      </div>
+      <div className='w-full flex py-10'>시작하기 버튼을 누르면 추가 인원 참여가 불가능합니다.</div>
+      <div className='flex flex-wrap text-sm mb-4 w-full justify-center'>
+        <div>링크 클릭해서 복사하기</div>
+        <div onClick={() => clipBoardCopy(inviteUrl)} className='w-full mb-8 break-words'>
+          {inviteUrl}
         </div>
       </div>
-      <div className='sm: flex py-10'>시작하기 버튼을 누르면 추가 인원 참여가 불가능합니다.</div>
-      <div className='sm: flex flex-wrap text-sm py-5 w-full'>
-        <div className='sm: w-full break-words'>{inviteUrl}</div>
-        <BaseButton onClick={() => clipBoardCopy(inviteUrl)}>복사하기</BaseButton>
+      <div className='flex justify-center'>
+        {isShowStartButton && <BaseButton onClick={startMultiGame}>시작하기</BaseButton>}
       </div>
-      <div>{isShowStartButton && <BaseButton onClick={startMultiGame}>시작하기</BaseButton>}</div>
     </PlayGameLayout>
   );
 };

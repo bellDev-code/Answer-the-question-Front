@@ -42,6 +42,8 @@ const ChangePlayerTypePage = () => {
     }
   };
 
+  // const isMultiGame = gameInfoResult?.gameType === 'multi';
+
   return (
     <PlayGameLayout>
       <div className='sm: flex flex-col  items-center justify-center'>
@@ -49,7 +51,7 @@ const ChangePlayerTypePage = () => {
         <div className='text-center break-keep'>
           <p>질문 대상자 선정 방식을 변경 할 수 있어요.</p>
           <p>
-            현재는{' '}
+            현재는
             <strong>
               {convertPlayerSelectionType(gameInfoResult?.playerSelectionType || 'direct')}
             </strong>

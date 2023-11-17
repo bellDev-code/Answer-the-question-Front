@@ -1,10 +1,9 @@
 import { useJoinRoomQuery } from '@Api/multiGame';
 import { BaseButton } from '@Components/atom/button/BaseButton';
-import { DYNAMIC_ROUTE_PATH, SESSION_USERNAME } from '@Configure/constant';
-import gameInfoStore from '@Store/useGameInfoStore';
+import { SESSION_USERNAME } from '@Configure/constant';
 import { Box, Modal } from '@mui/material';
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 interface IProps {
@@ -16,15 +15,14 @@ interface IProps {
 const index: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
   const { gameId } = useParams();
   const [username, setUsername] = useState('');
-  const navigate = useNavigate();
-  const { setMultiResult } = gameInfoStore();
+
   const handleChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
 
   const { mutate: joinRoomMutate } = useJoinRoomQuery();
 
-  const handleSumit = () => {
+  const handleSummit = () => {
     joinRoomMutate(
       {
         gameId: gameId || '',
@@ -35,8 +33,6 @@ const index: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
           if (data.code === 200) {
             sessionStorage.setItem(SESSION_USERNAME, username || '');
             setIsOpen(false);
-            setMultiResult(data.data);
-            navigate(`${DYNAMIC_ROUTE_PATH(gameId || '', 0).WATING_PAGE}`);
           }
         },
         onError: (error) => {
@@ -72,19 +68,23 @@ const index: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             overflow: 'auto',
+            p: 0,
           }}
         >
-          <div className='flex justify-around items-center gap-3'>
-            <h2>이름을 입력하세요</h2>
-            <input
-              type='text'
-              placeholder='Username'
-              value={username}
-              onChange={handleChangeUserName}
-            />
-          </div>
-          <div className='flex items-center justify-center py-3'>
-            <BaseButton onClick={handleSumit}>제출</BaseButton>
+          <div className='flex flex-col justify-between  h-full'>
+            <h2 className='w-full text-center border-b p-4'>이름을 입력하세요</h2>
+            <div className='flex justify-between items-center gap-3'>
+              <input
+                type='text'
+                placeholder='ex) 이수한'
+                value={username}
+                onChange={handleChangeUserName}
+                className='p-2 border-b text-center m-auto border-black place-content-center'
+              />
+            </div>
+            <div className='flex items-center justify-center py-3'>
+              <BaseButton onClick={handleSummit}>참여</BaseButton>
+            </div>
           </div>
         </Box>
       </Modal>

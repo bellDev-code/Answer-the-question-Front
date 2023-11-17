@@ -40,7 +40,7 @@ const SinglePage = () => {
             <input
               className='p-2 border-b w-full border-black place-content-center'
               type='text'
-              placeholder='이름을 입력해주세요.'
+              placeholder='ex) 이수한'
               value={username}
               onChange={handleNameChange}
               onKeyDown={handleEnterKey}

@@ -7,10 +7,12 @@ import PlayGameLayout from '@Layouts/PlayGameLayout';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import PlayTypeSelection from '@Components/PlayTypeSelection';
+import { convertPlayerSelectionType } from 'src/utils/convertText';
 
 const MultiDevicePage = () => {
   const { mutate: createRoomMutate } = useCreateRoomQuery();
-  const [selectedType, setSelectedType] = useState<TPlaySelectionType | null>(null);
+  const [selectedPlayType, setSelectedPlayType] = useState<TPlaySelectionType>('direct');
   const [players, setPlayers] = useState<string>('');
 
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const MultiDevicePage = () => {
   };
 
   const createMultiRoom = () => {
-    if (!selectedType) {
+    if (!selectedPlayType) {
       toast('선택한 유형이 없습니다.');
       return;
     }
@@ -32,7 +34,7 @@ const MultiDevicePage = () => {
 
     const createRoomData: IRequestMultiCreateData = {
       players: [{ username: players }],
-      playerSelectionType: selectedType,
+      playerSelectionType: selectedPlayType,
       category: 'serious',
     };
 
@@ -52,45 +54,36 @@ const MultiDevicePage = () => {
       },
     });
   };
+
   return (
     <>
       <BackButtonWithText />
       <PlayGameLayout>
-        <div>
-          <div className='sm: flex py-8 flex-col'>
-            <div className='sm: py-5'>방을 만들어주세요</div>
-            <div>이름을 입력해주세요. 최대 10명까지 이용이 가능합니다.</div>
-          </div>
-          <div className='sm: flex items-center justify-center gap-6 py-5'>
-            <input
-              type='text'
-              placeholder='이름을 입력해주세요'
-              value={players}
-              onChange={handleInputChange}
-              autoFocus
-            />
-            <BaseButton onClick={createMultiRoom}>방 만들기</BaseButton>
-          </div>
-          <div className='sm: flex items-center justify-center py-5 gap-2'>
-            <div>
-              <button
-                onClick={() => setSelectedType('direct')}
-                className='sm: bg-black text-white p-2 rounded-xl 
-            hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300'
-              >
-                질문 대상자를 지목합니다.
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={() => setSelectedType('random')}
-                className='sm: bg-black text-white p-2 rounded-xl
-            hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300'
-              >
-                질문 대상자를 랜덤으로 지정합니다.
-              </button>
-            </div>
-          </div>
+        <div className='flex py-8 flex-col text-center'>
+          <div className=''>방을 먼저 생성해요.</div>
+          <div>방을 만드는 사람의 이름을 입력해주세요.</div>
+        </div>
+        <div className='flex items-center justify-center gap-6 py-5 mb-6'>
+          <input
+            className='p-2 border-b w-full border-black place-content-center'
+            type='text'
+            placeholder='ex) 이수한'
+            value={players}
+            onChange={handleInputChange}
+            autoFocus
+          />
+        </div>
+
+        <div className='text-center mb-8'>{convertPlayerSelectionType(selectedPlayType)}</div>
+
+        <div className='flex justify-center w-full'>
+          <PlayTypeSelection
+            selectedPlayType={selectedPlayType}
+            setSelectedPlayType={setSelectedPlayType}
+          />
+        </div>
+        <div className='flex  justify-center mt-10'>
+          <BaseButton onClick={createMultiRoom}>방 만들기</BaseButton>
         </div>
       </PlayGameLayout>
     </>
