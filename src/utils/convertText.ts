@@ -3,9 +3,9 @@ import { TGameCategory, TPlaySelectionType } from '@Api/types';
 export const convertPlayerSelectionType = (type: TPlaySelectionType) => {
   switch (type) {
     case 'direct':
-      return '지목 방식';
+      return '직접 선택';
     case 'random':
-      return '랜덤 방식';
+      return '랜덤 선택';
     default:
       return '';
   }

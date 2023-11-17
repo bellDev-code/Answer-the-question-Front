@@ -43,7 +43,7 @@ const TypewriterComponent = ({ text }: IProps) => {
   };
 
   return (
-    <div className='w-full border-b pb-2'>
+    <div className='w-full pb-2'>
       <Typewriter
         onInit={(typewriter) => {
           typewriter

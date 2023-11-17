@@ -11,7 +11,6 @@ import { DYNAMIC_ROUTE_PATH } from '@Configure/constant';
 import PlayGameLayout from '@Layouts/PlayGameLayout';
 import SelectPlayerComponent from '@Components/SelectPlayer';
 import QuestionAndAnswer from '@Components/QuestionAndAnswer';
-import GuideTextComponent from '@Components/GuideText';
 import { BaseButton } from '@Components/atom/button/BaseButton';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDelayedVisibility } from 'src/hooks/useDelayedVisibility';
@@ -97,19 +96,6 @@ const AnswerPage = () => {
             className='mb-6'
           />
         )}
-
-        <GuideTextComponent>
-          <div>질문에 답변을 한 후, 다음 단계로 넘어갑니다:</div>
-          <ul>
-            <li>
-              <strong>다음 사람 선택</strong>: 화면에서 다음 대화 상대를 선택합니다.
-            </li>
-            <li>
-              <strong>다음 질문 버튼 클릭</strong>: 선택한 후,{'다음 질문'} 버튼을 눌러 다음 단계로
-              진행합니다.
-            </li>
-          </ul>
-        </GuideTextComponent>
       </div>
       <div className='flex justify-end px-10 py-10'>
         {isShowButton && (
