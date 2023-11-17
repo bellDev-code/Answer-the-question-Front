@@ -46,10 +46,7 @@ const App = () => {
             element={<ChangePlayerTypePage />}
           />
 
-          <Route
-            path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.END_PAGE}`}
-            element={<EndPage />}
-          />
+          <Route path={`${ROUTE_PATH.SINGLE_PAGE}${ROUTE_PATH.END_PAGE}`} element={<EndPage />} />
           <Route
             path={`${BASE_ROUTE_SINGLE_PAGE_WITH_GAME_ID}${ROUTE_PATH.DONATE_PAGE}`}
             element={<DonatePage />}

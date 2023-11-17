@@ -18,7 +18,7 @@ export const DYNAMIC_ROUTE_PATH = (gameId: string, questionIndex: number) => ({
   SELECT_QA_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.SELECT_QA_PAGE}`,
   ANSWER_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.ANSWER_PAGE}`,
   BM_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.BM_PAGE}`,
-  END_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.END_PAGE}`,
+  END_PAGE: `${ROUTE_PATH.SINGLE_PAGE}${ROUTE_PATH.END_PAGE}`,
   RANDOM_QA_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.RANDOM_QA_PAGE}`,
   DONATE_PAGE: `${ROUTE_PATH.SINGLE_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.DONATE_PAGE}`,
   MULTI_ROOM: `${ROUTE_PATH.MULTI_PAGE}/${gameId}/${questionIndex}${ROUTE_PATH.MULTI_ROOM}`,
